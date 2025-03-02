@@ -1,0 +1,19 @@
+.btn-search {
+  color: white !important;
+  background-color: #98999d;
+  border-color: #98999d;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.navbar {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 0.1em !important;
+}
+
+div.el-table tbody td {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
