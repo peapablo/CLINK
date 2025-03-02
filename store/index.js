@@ -1,133 +1,91 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { defineStore } from "pinia";
+import { useStorage } from "@vueuse/core";
 import axios from "axios";
 
-Vue.use(Vuex);
+export const useMainStore = defineStore("main", {
+  state: () => ({
+    urlBase: "https://env-7663913.th1.proen.cloud",
+    accessToken: useStorage("c-link-accessToken", null),
+    expired: useStorage("c-link-expired", null),
 
-export const state = () => ({
-  urlBase: 'https://env-7663913.th1.proen.cloud',
-  // urlBase: "https://clink-laravel.igloo.solutions",
-  // urlBase: "http://localhost/api",
-  accessToken: null,
-  expired: null,
+    // Profile
+    permissions: [],
+    profile: useStorage("c-link-profile", null),
 
-  // Profile
-  permissions: [],
-  profile: null,
+    // Application
+    urgentAmount: 0,
+    urgentOrderIds: [],
+    favoriteMenus: useStorage("c-link-favorite-menus", []),
+  }),
 
-  // Application
-  urgentAmount: 0,
-  urgentOrderIds: [],
-  favoriteMenus: [],
-});
+  actions: {
+    setProfile(value) {
+      this.profile = value;
+    },
 
-export const mutations = {
-  setProfile(state, value) {
-    state.profile = value;
+    setPermissions(value) {
+      this.permissions = value;
+    },
 
-    localStorage.setItem("c-link-profile", JSON.stringify(value));
-  },
-  setPermissions(state, value) {
-    state.permissions = value;
-  },
-  setAccessToken(state, value) {
-    state.accessToken = value;
+    setAccessToken(value) {
+      this.accessToken = value;
+    },
 
-    localStorage.setItem("c-link-accessToken", value);
-  },
-  setExpired(state, value) {
-    state.expired = value;
+    setExpired(value) {
+      this.expired = value;
+    },
 
-    localStorage.setItem("c-link-expired", value);
-  },
-  setUrgentAmount(state, value) {
-    state.urgentAmount = value;
-  },
-  setUrgentOrderIds(state, value) {
-    state.urgentOrderIds = value;
-  },
-  removeAccessToken(state) {
-    state.accessToken = null;
-    localStorage.removeItem("c-link-accessToken");
-  },
-  removeExpired(state) {
-    state.expired = null;
+    setUrgentAmount(value) {
+      this.urgentAmount = value;
+    },
 
-    localStorage.removeItem("c-link-expired");
-  },
-  async getUrgentAmount(state) {
-    const url = state.urlBase + "/api/order/total-very-urgent";
-    return axios.get(url).then((response) => {
-      const urgentAmount = response.data?.amount_new_order ?? 0;
-      const orderIds = response.data?.very_urgent_order_id ?? {};
+    setUrgentOrderIds(value) {
+      this.urgentOrderIds = value;
+    },
 
-      state.urgentAmount = urgentAmount;
-      state.urgentOrderIds = orderIds;
-    });
-  },
-  initializeStore(state) {
-    if (localStorage.getItem("c-link-expired")) {
-      const expiredTime = localStorage.getItem("c-link-expired");
-      const now = new Date();
-      const nowTime = now.getTime() / 1000;
+    removeAccessToken() {
+      this.accessToken = null;
+    },
 
-      const isRememberMe = expiredTime === null;
-      const isExpired = nowTime > expiredTime;
+    removeExpired() {
+      this.expired = null;
+    },
 
-      if (isExpired && isRememberMe) {
-        state.accessToken = null;
-        localStorage.removeItem("c-link-accessToken");
+    async getUrgentAmount() {
+      try {
+        const url = `${this.urlBase}/api/order/total-very-urgent`;
+        const response = await axios.get(url);
+        this.urgentAmount = response.data?.amount_new_order ?? 0;
+        this.urgentOrderIds = response.data?.very_urgent_order_id ?? [];
+      } catch (error) {
+        console.error("Error fetching urgent amount:", error);
+      }
+    },
 
-        localStorage.removeItem("c-link-expired");
-      } else {
-        if (localStorage.getItem("c-link-accessToken")) {
-          state.accessToken = localStorage.getItem("c-link-accessToken");
+    initializeStore() {
+      const expiredTime = this.expired;
+      if (expiredTime) {
+        const nowTime = new Date().getTime() / 1000;
+        const isRememberMe = expiredTime === null;
+        const isExpired = nowTime > expiredTime;
+
+        if (isExpired && isRememberMe) {
+          this.accessToken = null;
+          this.expired = null;
         }
       }
-    } else {
-      if (localStorage.getItem("c-link-accessToken")) {
-        state.accessToken = localStorage.getItem("c-link-accessToken");
-      }
-    }
+    },
 
-    if (localStorage.getItem("c-link-profile")) {
-      state.profile = JSON.parse(localStorage.getItem("c-link-profile"));
-    }
+    getFavoritesMenus() {
+      return this.favoriteMenus;
+    },
 
-    if (localStorage.getItem("c-link-favorite-menus")) {
-      state.favoriteMenus = JSON.parse(
-        localStorage.getItem("c-link-favorite-menus")
-      );
-    }
+    setFavoritesMenus(value) {
+      this.favoriteMenus = value;
+    },
   },
-  getFavoritesMenus(state) {
-    state.favoriteMenus = JSON.parse(
-      localStorage.getItem("c-link-favorite-menus")
-    );
+
+  getters: {
+    accessToken: (state) => state.accessToken,
   },
-  setFavoritesMenus(state, value) {
-    state.favoriteMenus = value;
-    localStorage.setItem("c-link-favorite-menus", JSON.stringify(value));
-  },
-};
-
-export const actions = {};
-
-export const getters = {
-  accessToken(state) {
-    return state.accessToken;
-  },
-};
-
-const plugins = [];
-
-// if (process.client) {
-//   plugins.push(
-//     createPersistedState({
-//       key: "clink-store", // change this to a unique key
-//       paths: ["accessToken", "refreshToken"],
-//     })
-//   );
-// }
-
-export { plugins };
+});
