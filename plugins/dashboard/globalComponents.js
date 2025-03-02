@@ -16,29 +16,32 @@ import RouteBreadcrumb from '~/components/argon-core/Breadcrumb/RouteBreadcrumb'
 import StatsCard from '~/components/argon-core/Cards/StatsCard.vue';
 import { Input, Tooltip, Popover } from 'element-ui';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Vue from 'vue';
-/**
- * You can register global components here and use them as a plugin in your main Vue instance
- */
 
-Vue.component(Badge.name, Badge);
-Vue.component(BaseAlert.name, BaseAlert);
-Vue.component(BaseButton.name, BaseButton);
-Vue.component(BaseCheckbox.name, BaseCheckbox);
-Vue.component(BaseHeader.name, BaseHeader);
-Vue.component(BaseInput.name, BaseInput);
-Vue.component(BaseDropdown.name, BaseDropdown);
-Vue.component(BaseNav.name, BaseNav);
-Vue.component(BasePagination.name, BasePagination);
-Vue.component(BaseProgress.name, BaseProgress);
-Vue.component(BaseRadio.name, BaseRadio);
-Vue.component(BaseSwitch.name, BaseSwitch);
-Vue.component(Card.name, Card);
-Vue.component(Modal.name, Modal);
-Vue.component(StatsCard.name, StatsCard);
-Vue.component(RouteBreadcrumb.name, RouteBreadcrumb);
-Vue.component(Input.name, Input);
-Vue.component('validation-provider', ValidationProvider)
-Vue.component('validation-observer', ValidationObserver)
-Vue.use(Tooltip);
-Vue.use(Popover);
+export default defineNuxtPlugin(nuxtApp => {
+  // Registering components globally
+  nuxtApp.vueApp.component(Badge.name, Badge);
+  nuxtApp.vueApp.component(BaseAlert.name, BaseAlert);
+  nuxtApp.vueApp.component(BaseButton.name, BaseButton);
+  nuxtApp.vueApp.component(BaseCheckbox.name, BaseCheckbox);
+  nuxtApp.vueApp.component(BaseDropdown.name, BaseDropdown);
+  nuxtApp.vueApp.component(BaseHeader.name, BaseHeader);
+  nuxtApp.vueApp.component(BaseInput.name, BaseInput);
+  nuxtApp.vueApp.component(BaseNav.name, BaseNav);
+  nuxtApp.vueApp.component(BasePagination.name, BasePagination);
+  nuxtApp.vueApp.component(BaseProgress.name, BaseProgress);
+  nuxtApp.vueApp.component(BaseRadio.name, BaseRadio);
+  nuxtApp.vueApp.component(BaseSwitch.name, BaseSwitch);
+  nuxtApp.vueApp.component(Card.name, Card);
+  nuxtApp.vueApp.component(Modal.name, Modal);
+  nuxtApp.vueApp.component(StatsCard.name, StatsCard);
+  nuxtApp.vueApp.component(RouteBreadcrumb.name, RouteBreadcrumb);
+  nuxtApp.vueApp.component(Input.name, Input);
+
+  // Registering VeeValidate components
+  nuxtApp.vueApp.component('validation-provider', ValidationProvider);
+  nuxtApp.vueApp.component('validation-observer', ValidationObserver);
+
+  // Using element-ui plugins
+  nuxtApp.vueApp.use(Tooltip);
+  nuxtApp.vueApp.use(Popover);
+});
