@@ -50,60 +50,46 @@
     </footer>
   </div>
 </template>
-<script>
-import Vue from "vue";
-import BaseNav from "~/components/argon-core/Navbar/BaseNav.vue";
-import ManualOrderFormModal from "../pages/components/manual-order-form-modal.vue";
 
-Vue.component("manual-order-form-modal", ManualOrderFormModal);
+<script setup>
+import { ref, computed, watch } from 'vue';
+import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue';
+import ManualOrderFormModal from '../pages/components/manual-order-form-modal.vue';
 
-export default {
-  components: {
-    BaseNav,
+// ลงทะเบียน component
+defineProps({
+  backgroundColor: {
+    type: String,
+    default: 'black',
   },
-  props: {
-    backgroundColor: {
-      type: String,
-      default: "black",
-    },
-  },
-  data() {
-    return {
-      showMenu: false,
-      menuTransitionDuration: 250,
-      year: new Date().getFullYear(),
-      pageClass: "login-page",
-    };
-  },
-  computed: {
-    title() {
-      return `${this.$route.name} Page`;
-    },
-    layoutClass() {
-      let exceptions = ["index", "home"];
-      if (!exceptions.includes(this.$route.name)) {
-        return "bg-default";
-      } else {
-        return "";
-      }
-    },
-  },
-  methods: {
-    closeMenu() {
-      document.body.classList.remove("nav-open");
-      this.showMenu = false;
-    },
-  },
-  watch: {
-    "$route.path"() {
-      if (this.showMenu) {
-        this.closeMenu();
-      }
-    },
-  },
+});
+
+const showMenu = ref(false);
+const year = new Date().getFullYear();
+const pageClass = 'login-page';
+
+const layoutClass = computed(() => {
+  const exceptions = ['index', 'home'];
+  if (!exceptions.includes(useRoute().name)) {
+    return 'bg-default';
+  } else {
+    return '';
+  }
+});
+
+const closeMenu = () => {
+  document.body.classList.remove('nav-open');
+  showMenu.value = false;
 };
+
+watch(() => useRoute().path, () => {
+  if (showMenu.value) {
+    closeMenu();
+  }
+});
 </script>
-<style lang="scss">
+
+<style scoped lang="scss">
 .auth-layout {
   min-height: 100vh;
 }
