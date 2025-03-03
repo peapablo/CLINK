@@ -1,79 +1,73 @@
 <template>
   <div>
-    <base-header class="pb-6">
+    <BaseHeader class="pb-6">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">Widgets</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-            <route-bread-crumb></route-bread-crumb>
+            <RouteBreadCrumb />
           </nav>
         </div>
         <div class="col-lg-6 col-5 text-right">
-          <base-button size="sm" type="neutral">New</base-button>
-          <base-button size="sm" type="neutral">Filters</base-button>
+          <BaseButton size="sm" type="neutral">New</BaseButton>
+          <BaseButton size="sm" type="neutral">Filters</BaseButton>
         </div>
       </div>
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3 col-md-6">
-          <stats-card title="Total traffic"
+          <StatsCard title="Total traffic"
                       type="gradient-red"
                       sub-title="350,897"
                       icon="ni ni-active-40">
-
-            <template slot="footer">
+            <template #footer>
               <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
               <span class="text-nowrap">Since last month</span>
             </template>
-          </stats-card>
+          </StatsCard>
         </div>
         <div class="col-xl-3 col-md-6">
-          <stats-card title="Total traffic"
+          <StatsCard title="Total traffic"
                       type="gradient-orange"
                       sub-title="2,356"
                       icon="ni ni-chart-pie-35">
-
-            <template slot="footer">
+            <template #footer>
               <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
               <span class="text-nowrap">Since last month</span>
             </template>
-          </stats-card>
+          </StatsCard>
         </div>
         <div class="col-xl-3 col-md-6">
-          <stats-card title="Sales"
+          <StatsCard title="Sales"
                       type="gradient-green"
                       sub-title="924"
                       icon="ni ni-money-coins">
-
-            <template slot="footer">
+            <template #footer>
               <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
               <span class="text-nowrap">Since last month</span>
             </template>
-          </stats-card>
-
+          </StatsCard>
         </div>
         <div class="col-xl-3 col-md-6">
-          <stats-card title="Performance"
+          <StatsCard title="Performance"
                       type="gradient-info"
                       sub-title="49,65%"
                       icon="ni ni-chart-bar-32">
-
-            <template slot="footer">
+            <template #footer>
               <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 54.8%</span>
               <span class="text-nowrap">Since last month</span>
             </template>
-          </stats-card>
+          </StatsCard>
         </div>
       </div>
-    </base-header>
+    </BaseHeader>
+
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-lg-4">
           <!-- Image-Text card -->
           <div class="card">
-            <!-- Card image -->
             <img class="card-img-top" src="~/static/img/theme/img-1-1000x900.jpg" alt="Image placeholder">
-            <!-- Card body -->
             <div class="card-body">
               <h5 class="h2 card-title mb-0">Get started with Argon</h5>
               <small class="text-muted">by John Snow on Oct 29th at 10:23 AM</small>
@@ -82,19 +76,14 @@
             </div>
           </div>
 
-          <!-- Members list group card -->
-          <members-card/>
+          <MembersCard />
 
           <!-- Messages -->
           <div class="card">
-            <!-- Card header -->
             <div class="card-header">
-              <!-- Title -->
               <h5 class="h3 mb-0">Latest messages</h5>
             </div>
-            <!-- Card body -->
             <div class="card-body p-0">
-              <!-- List group -->
               <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4">
                   <div class="d-flex w-100 justify-content-between">
@@ -126,69 +115,69 @@
             </div>
           </div>
 
-          <!-- Master card -->
-
-          <credit-card/>
+          <CreditCard />
         </div>
 
         <div class="col-lg-4">
-          <!-- Calendar widget. This widget is initialized globall inside plugins/dashboard/full-calendar -->
-          <client-only>
-            <calendar-widget></calendar-widget>
-          </client-only>
+          <!-- Calendar widget -->
+          <ClientOnly>
+            <CalendarWidget />
+          </ClientOnly>
 
-          <!-- Timeline card -->
-          <timeline-card></timeline-card>
+          <TimelineCard />
 
-          <!-- Progress track -->
-          <progress-track-list/>
+          <ProgressTrackList />
 
-          <!-- Paypal card -->
-          <paypal-card/>
+          <PaypalCard />
         </div>
 
         <div class="col-lg-4">
-          <!-- Vector map -->
-          <vector-map-card/>
+          <VectorMapCard />
 
-          <visa-card/>
-          <!-- Stats cards-->
-          <stats-cards></stats-cards>
-
-          <!-- Checklist -->
-          <task-list></task-list>
+          <VisaCard />
+          <StatsCards />
+          <TaskList />
         </div>
       </div>
     </div>
   </div>
 </template>
-<script>
-  import StatsCard from '@/components/argon-core/Cards/StatsCard'
-  import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb'
-  import TimelineCard from '~/components/widgets/TimelineCard'
-  import MembersCard from "~/components/widgets/MembersCard";
-  import CreditCard from "~/components/widgets/CreditCard";
-  import ProgressTrackList from "~/components/widgets/ProgressTrackList";
-  import PaypalCard from "~/components/widgets/PaypalCard";
-  import VectorMapCard from "~/components/widgets/VectorMapCard";
-  import VisaCard from "~/components/widgets/VisaCard";
-  import StatsCards from "~/components/widgets/StatsCards";
-  import TaskList from "~/components/widgets/TaskList";
 
-  export default {
+<script setup>
+import { defineComponent } from 'vue';
+import StatsCard from '@/components/argon-core/Cards/StatsCard'
+import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb'
+import TimelineCard from '~/components/widgets/TimelineCard'
+import MembersCard from "~/components/widgets/MembersCard";
+import CreditCard from "~/components/widgets/CreditCard";
+import ProgressTrackList from "~/components/widgets/ProgressTrackList";
+import PaypalCard from "~/components/widgets/PaypalCard";
+import VectorMapCard from "~/components/widgets/VectorMapCard";
+import VisaCard from "~/components/widgets/VisaCard";
+import StatsCards from "~/components/widgets/StatsCards";
+import TaskList from "~/components/widgets/TaskList";
+import CalendarWidget from '~/components/widgets/CalendarWidget';
+import BaseHeader from '~/components/argon-core/Headers/BaseHeader'
+import BaseButton from '~/components/argon-core/Buttons/BaseButton'
+import ClientOnly from '~/components/ClientOnly.vue'
+
+defineComponent({
   layout: 'DashboardLayout',
   components: {
-    VisaCard,
-    VectorMapCard,
-    PaypalCard,
-    StatsCards,
-    ProgressTrackList,
-    CreditCard,
-    MembersCard,
+    BaseHeader,
+    BaseButton,
     StatsCard,
     RouteBreadCrumb,
     TimelineCard,
-    TaskList
+    MembersCard,
+    CreditCard,
+    ProgressTrackList,
+    PaypalCard,
+    VectorMapCard,
+    VisaCard,
+    StatsCards,
+    TaskList,
+    CalendarWidget
   }
-};
+});
 </script>

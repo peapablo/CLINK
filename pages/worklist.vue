@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Header Section -->
     <div class="w-100 border-bottom">
       <div class="container-fluid py-3">
         <div class="row align-items-center mb-4">
@@ -9,10 +10,7 @@
           <div class="col col-xl text-center">
             <div class="bg-secondary py-1 px-2 border rounded">
               <div class="d-flex flex-row align-items-center">
-                <div
-                  class="mr-2"
-                  style="cursor: pointer;"
-                >
+                <div class="mr-2" style="cursor: pointer;">
                   <i class="fas fa-search"></i>
                 </div>
                 <div class="flex-grow-1">
@@ -25,42 +23,26 @@
                 </div>
               </div>
             </div>
-
           </div>
           <div class="col-auto col-xl text-right py-1">
-            <base-button
-              icon
-              outline
-              type="default"
-            >
-              <span class="btn-inner--icon"><i class="fas fa-printni fa-print"></i></span>
+            <base-button icon outline type="default">
+              <span class="btn-inner--icon"><i class="fas fa-print"></i></span>
             </base-button>
-            <base-button
-              icon
-              outline
-              type="default"
-              class="mx-4"
-            >
+            <base-button icon outline type="default" class="mx-4">
               <span class="btn-inner--icon"><i class="fas fa-file-export"></i></span>
               <span class="btn-inner--text">Export</span>
             </base-button>
-
-            <base-button
-              icon
-              outline
-              type="default"
-            >
+            <base-button icon outline type="default">
               <span class="btn-inner--icon"><i class="fas fa-broom"></i></span>
             </base-button>
           </div>
         </div>
-
       </div>
     </div>
 
+    <!-- Table Section -->
     <div class="container-fluid py-3">
       <div class="card">
-
         <el-table
           class="table-responsive table-flush"
           header-row-class-name="thead-light"
@@ -69,74 +51,26 @@
           :data="queriedData"
           ref="singleTable"
         >
-
-          <el-table-column
-            label="Date"
-            prop="date"
-            width="130"
-          >
-
-          </el-table-column>
-          <el-table-column
-            label="Order ID"
-            prop="orderId"
-            width="130"
-          >
-          </el-table-column>
-          <el-table-column
-            label="HN"
-            prop="hn"
-            width="130"
-          >
-          </el-table-column>
-          <el-table-column
-            label="First name"
-            prop="firstname"
-            width="130"
-          >
-          </el-table-column>
-          <el-table-column
-            label="Last name"
-            prop="lastname"
-            width="130"
-          >
-          </el-table-column>
-          <el-table-column
-            label="Specimen"
-            prop="specimen"
-            width="130"
-          >
-          </el-table-column>
-          <el-table-column
-            label="Primary Test"
-            prop="primaryTest"
-            width="180"
-          >
-          </el-table-column>
-          <el-table-column
-            label="Remark"
-            prop="remark"
-          >
-            <template v-slot="{row}">
-              <input
-                type="text"
-                class="form-control"
-                v-model="row.note"
-              />
+          <el-table-column label="Date" prop="date" width="130" />
+          <el-table-column label="Order ID" prop="orderId" width="130" />
+          <el-table-column label="HN" prop="hn" width="130" />
+          <el-table-column label="First name" prop="firstname" width="130" />
+          <el-table-column label="Last name" prop="lastname" width="130" />
+          <el-table-column label="Specimen" prop="specimen" width="130" />
+          <el-table-column label="Primary Test" prop="primaryTest" width="180" />
+          <el-table-column label="Remark" prop="remark">
+            <template v-slot="{ row }">
+              <input type="text" class="form-control" v-model="row.note" />
             </template>
           </el-table-column>
         </el-table>
+
+        <!-- Pagination -->
         <div
           slot="footer"
-          class="
-          col-12
-          d-flex
-          justify-content-center justify-content-sm-between
-          flex-wrap
-          mt-4
-        "
+          class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap mt-4"
         >
-          <div class="">
+          <div>
             <p class="card-category">
               Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
             </p>
@@ -146,13 +80,13 @@
             v-model="pagination.currentPage"
             :per-page="pagination.perPage"
             :total="total"
-          >
-          </base-pagination>
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb';
 import { BasePagination } from '@/components/argon-core';
@@ -176,6 +110,7 @@ export default {
   },
   data() {
     return {
+      searchQuery: '',
       tableData: [
         {
           date: '01-01-2021',
@@ -185,7 +120,7 @@ export default {
           lastname: 'Lastname',
           specimen: 'Specimen',
           primaryTest: 'Primary Test',
-          Remark: 'Note',
+          remark: 'Note',
         },
       ],
       dateFrom:
@@ -206,13 +141,34 @@ export default {
         altFormat: 'd-m-Y',
         dateFormat: 'Y-m-d',
       },
+      pagination: {
+        currentPage: 1,
+        perPage: 10,
+      },
     };
   },
-  methods: {},
+  computed: {
+    queriedData() {
+      if (!this.searchQuery) return this.tableData;
+      return this.tableData.filter(
+        (item) =>
+          item.orderId.includes(this.searchQuery) ||
+          item.firstname.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          item.lastname.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    total() {
+      return this.tableData.length;
+    },
+    from() {
+      return (this.pagination.currentPage - 1) * this.pagination.perPage;
+    },
+    to() {
+      return Math.min(this.pagination.currentPage * this.pagination.perPage, this.total);
+    },
+  },
 };
 </script>
-<style>
-</style>
 
 <style scoped>
 small {
@@ -222,12 +178,6 @@ small {
   background-color: transparent;
 }
 .input-style:focus-visible {
-  outline: -webkit-focus-ring-color auto 0px !important;
+  outline: none;
 }
 </style>
-
-
-
-
-
-
