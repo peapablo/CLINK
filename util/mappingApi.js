@@ -1,3 +1,4 @@
+// utils/mappingAPI.js
 const data = {
   "data_category.php": "masterdata/data_category",
   "data_specimen.php": "masterdata/data_specimen",
@@ -26,10 +27,10 @@ const data = {
   "print-culture.php": "print-culture",
 };
 
-export const mappingApi = (api) => {
-  if (!data.hasOwnProperty(api)) {
-    console.error("API not found - " + api);
+export default function mappingApi(api) {
+  if (!Object.prototype.hasOwnProperty.call(data, api)) {
+    console.error("API not found:", api);
     return api;
   }
   return data[api];
-};
+}

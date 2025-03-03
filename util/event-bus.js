@@ -1,3 +1,6 @@
-import Vue from "vue";
+// utils/event-bus.js
+import mitt from "mitt";
 
-export const EventBus = new Vue();
+const EventBus = mitt();
+
+export default EventBus;
