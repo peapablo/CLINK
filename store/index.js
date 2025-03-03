@@ -1,91 +1,78 @@
 import { defineStore } from "pinia";
-import { useStorage } from "@vueuse/core";
-import axios from "axios";
 
-export const useMainStore = defineStore("main", {
-  state: () => ({
-    urlBase: "https://env-7663913.th1.proen.cloud",
-    accessToken: useStorage("c-link-accessToken", null),
-    expired: useStorage("c-link-expired", null),
+export const useMainStore = defineStore("main", () => {
+  const config = useRuntimeConfig();
 
-    // Profile
-    permissions: [],
-    profile: useStorage("c-link-profile", null),
+  // State
+  const urlBase = config.public.apiBase || "https://env-7663913.th1.proen.cloud";
+  const accessToken = useState("c-link-accessToken", () => null);
+  const expired = useState("c-link-expired", () => null);
+  const profile = useState("c-link-profile", () => null);
+  const permissions = ref([]);
+  const urgentAmount = ref(0);
+  const urgentOrderIds = ref([]);
+  const favoriteMenus = useState("c-link-favorite-menus", () => []);
 
-    // Application
-    urgentAmount: 0,
-    urgentOrderIds: [],
-    favoriteMenus: useStorage("c-link-favorite-menus", []),
-  }),
+  // Actions
+  const setProfile = (value) => (profile.value = value);
+  const setPermissions = (value) => (permissions.value = value);
+  const setAccessToken = (value) => (accessToken.value = value);
+  const setExpired = (value) => (expired.value = value);
+  const setUrgentAmount = (value) => (urgentAmount.value = value);
+  const setUrgentOrderIds = (value) => (urgentOrderIds.value = value);
+  const removeAccessToken = () => (accessToken.value = null);
+  const removeExpired = () => (expired.value = null);
 
-  actions: {
-    setProfile(value) {
-      this.profile = value;
-    },
+  const getUrgentAmount = async () => {
+    try {
+      const url = `${urlBase}/api/order/total-very-urgent`;
+      const response = await $fetch(url);
+      urgentAmount.value = response.amount_new_order ?? 0;
+      urgentOrderIds.value = response.very_urgent_order_id ?? [];
+    } catch (error) {
+      console.error("Error fetching urgent amount:", error);
+    }
+  };
 
-    setPermissions(value) {
-      this.permissions = value;
-    },
-
-    setAccessToken(value) {
-      this.accessToken = value;
-    },
-
-    setExpired(value) {
-      this.expired = value;
-    },
-
-    setUrgentAmount(value) {
-      this.urgentAmount = value;
-    },
-
-    setUrgentOrderIds(value) {
-      this.urgentOrderIds = value;
-    },
-
-    removeAccessToken() {
-      this.accessToken = null;
-    },
-
-    removeExpired() {
-      this.expired = null;
-    },
-
-    async getUrgentAmount() {
-      try {
-        const url = `${this.urlBase}/api/order/total-very-urgent`;
-        const response = await axios.get(url);
-        this.urgentAmount = response.data?.amount_new_order ?? 0;
-        this.urgentOrderIds = response.data?.very_urgent_order_id ?? [];
-      } catch (error) {
-        console.error("Error fetching urgent amount:", error);
+  const initializeStore = () => {
+    const expiredTime = expired.value;
+    if (expiredTime) {
+      const nowTime = Date.now() / 1000;
+      const isExpired = nowTime > expiredTime;
+      if (isExpired) {
+        accessToken.value = null;
+        expired.value = null;
       }
-    },
+    }
+  };
 
-    initializeStore() {
-      const expiredTime = this.expired;
-      if (expiredTime) {
-        const nowTime = new Date().getTime() / 1000;
-        const isRememberMe = expiredTime === null;
-        const isExpired = nowTime > expiredTime;
+  const getFavoritesMenus = () => favoriteMenus.value;
+  const setFavoritesMenus = (value) => (favoriteMenus.value = value);
 
-        if (isExpired && isRememberMe) {
-          this.accessToken = null;
-          this.expired = null;
-        }
-      }
-    },
+  // Getters
+  const isAuthenticated = computed(() => !!accessToken.value);
 
-    getFavoritesMenus() {
-      return this.favoriteMenus;
-    },
-
-    setFavoritesMenus(value) {
-      this.favoriteMenus = value;
-    },
-  },
-
-  getters: {
-    accessToken: (state) => state.accessToken,
-  },
+  return {
+    urlBase,
+    accessToken,
+    expired,
+    profile,
+    permissions,
+    urgentAmount,
+    urgentOrderIds,
+    favoriteMenus,
+    setProfile,
+    setPermissions,
+    setAccessToken,
+    setExpired,
+    setUrgentAmount,
+    setUrgentOrderIds,
+    removeAccessToken,
+    removeExpired,
+    getUrgentAmount,
+    initializeStore,
+    getFavoritesMenus,
+    setFavoritesMenus,
+    isAuthenticated,
+  };
 });
