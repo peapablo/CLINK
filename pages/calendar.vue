@@ -5,6 +5,7 @@
     </client-only>
   </div>
 </template>
+
 <script>
   export default {
     layout: 'DashboardLayout'
