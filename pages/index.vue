@@ -67,23 +67,35 @@
     </section>
   </div>
 </template>
+
 <script>
-import { Tooltip } from "element-ui";
+import { ref, onMounted } from "vue";
+import { ElTooltip } from "element-plus"; 
 
 export default {
   layout: "AuthLayout",
   name: "home-page",
   components: {
-    [Tooltip.name]: Tooltip,
+    ElTooltip,
   },
+  
+  setup() {
+    const router = useRouter();
+    const store = useStore();
 
-  mounted() {
-    this.$store.commit("initializeStore");
-    if (this.$store.state.accessToken == null) {
-      this.$router.push("/login");
-    } else {
-      this.$router.push("/dashboard");
-    }
+    onMounted(() => {
+      store.commit("initializeStore");
+      if (!store.state.accessToken) {
+        router.push("/login");
+      } else {
+        router.push("/dashboard");
+      }
+    });
+
+    return {};
   },
 };
 </script>
+
+<style scoped>
+</style>
