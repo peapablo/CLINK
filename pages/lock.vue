@@ -41,7 +41,6 @@
                             placeholder="Password"
                             v-model="model.password"
                 >
-
                 </base-input>
                 <div class="text-center">
                   <base-button type="primary" class="mt-2">Unlock</base-button>
@@ -52,20 +51,21 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
-<script>
-export default {
-  layout: 'AuthLayout',
-  name: 'lock',
-  data() {
-    return {
-      model: {
-        password: ''
-      }
-    }
-  }
-};
+
+<script setup>
+  import { ref } from 'vue';
+
+  // Model for password input
+  const model = ref({
+    password: ''
+  });
+
+  // Export layout
+  definePageMeta({
+    layout: 'AuthLayout'
+  });
 </script>
+
 <style></style>

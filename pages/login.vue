@@ -101,157 +101,114 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.css";
+<script setup>
+  import { ref, watch, onMounted } from 'vue';
+  import axios from 'axios';
+  import swal from 'sweetalert2';
+  import 'sweetalert2/dist/sweetalert2.css';
 
-export default {
-  layout: "AuthLayout",
-  data() {
-    return {
-      model: {
-        loginname: "",
-        password: "",
-        rememberMe: false,
-      },
-      isSubmitting: false,
-    };
-  },
+  // Define reactive model data
+  const model = ref({
+    loginname: '',
+    password: '',
+    rememberMe: false,
+  });
 
-  mounted() {
-    this.$store.commit("initializeStore");
-  },
+  const isSubmitting = ref(false);
 
-  watch: {
-    "$store.state.accessToken": function (val) {
-      if (val) {
-        this.$router.push("/dashboard");
+  // Watch for accessToken changes in store
+  watch(() => useStore().state.accessToken, (val) => {
+    if (val) {
+      useRouter().push('/dashboard');
+      swal.fire({
+        iconHtml: `
+          <div class="text-center">
+            <i class="fas fa-user-circle" style="font-size: 80px"></i>
+          </div>
+        `,
+        title: 'ยินดีต้อนรับ',
+        html: `
+          <h3 class="text-center">
+            ${useStore().state?.profile?.firstname} ${useStore().state?.profile?.lastname} เลข ท.น. ${useStore().state?.profile?.med_user_code}
+            <br />
+            ตำแหน่ง ${useStore().state?.profile?.position}
+          </h3>`,
+        showConfirmButton: false,
+        showCancelButton: false,
+        showCloseButton: true,
+        timer: 3000,
+        customClass: {
+          icon: 'login-swal2-icon',
+        },
+      });
+    }
+  });
+
+  // Handle form submission
+  const onSubmit = async () => {
+    if (model.value.loginname && model.value.password) {
+      isSubmitting.value = true;
+
+      const url = `${useStore().state.urlBase}/oauth/token`;
+      const bodyFormData = new FormData();
+      bodyFormData.append('grant_type', 'password');
+      bodyFormData.append('scope', '*');
+      bodyFormData.append('client_id', process.env.VUE_APP_AUTH_CLIENT_ID);
+      bodyFormData.append('client_secret', process.env.VUE_APP_AUTH_CLIENT_SECRET);
+      bodyFormData.append('username', model.value.loginname);
+      bodyFormData.append('password', model.value.password);
+
+      try {
+        const response = await axios.post(url, bodyFormData);
+        const { access_token: accessToken } = response.data;
+
+        const profileResponse = await axios.get(`${useStore().state.urlBase}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+
+        const profile = profileResponse.data ?? {};
+        delete profile['permissions'];
+        useStore().commit('setProfile', profile);
+
+        if (model.value.rememberMe) {
+          useStore().commit('setAccessToken', accessToken);
+          useStore().commit('removeExpired');
+        } else {
+          useStore().commit('setAccessToken', accessToken);
+          useStore().commit('setExpired', new Date().getTime() + 86400000);
+        }
+
+        isSubmitting.value = false;
+      } catch (err) {
         swal.fire({
-          iconHtml: `
-              <div class="text-center">
-                 <i class="fas fa-user-circle" style="font-size: 80px"></i>
-              </div>
-            `,
-          title: "ยินดีต้อนรับ",
-          html: `
-              <h3 class="text-center">
-                ${this.$store.state?.profile?.firstname} ${this.$store.state?.profile?.lastname} เลข ท.น. ${this.$store.state?.profile?.med_user_code}
-                <br />
-                ตำแหน่ง ${this.$store.state?.profile?.position}
-              </h3>`,
-          showConfirmButton: false,
+          icon: 'error',
+          title: 'ลงชื่อเข้าใช้งานไม่สำเร็จ',
+          confirmButtonText: 'ตกลง',
           showCancelButton: false,
-          showCloseButton: true,
-          timer: 3000,
+          buttonsStyling: false,
           customClass: {
-            icon: "login-swal2-icon",
+            confirmButton: 'btn btn-default',
+            cancelButton: 'btn btn-light',
+            actions: 'swal2-actions-center',
           },
+        }).then(() => {
+          isSubmitting.value = false;
         });
       }
-    },
-  },
+    }
+  };
 
-  methods: {
-    onSubmit() {
-      if (this.model.loginname != "" && this.model.password != "") {
-        this.isSubmitting = true;
-
-        const url = this.$store.state.urlBase + "/oauth/token";
-
-        let bodyFormData = new FormData();
-        bodyFormData.append("grant_type", "password");
-        bodyFormData.append("scope", "*");
-        bodyFormData.append("client_id", process.env.VUE_APP_AUTH_CLIENT_ID);
-        bodyFormData.append(
-          "client_secret",
-          process.env.VUE_APP_AUTH_CLIENT_SECRET
-        );
-
-        bodyFormData.append("username", this.model.loginname);
-        bodyFormData.append("password", this.model.password);
-
-        axios({
-          method: "post",
-          url: url,
-          data: bodyFormData,
-        })
-          .then((response) => {
-            const { access_token: accessToken } = response.data;
-
-            const url = this.$store.state.urlBase + "/api/auth/me";
-            axios
-              .get(url, {
-                headers: {
-                  Authorization: "Bearer " + accessToken,
-                },
-              })
-              .then((response) => {
-                const profile = response.data ?? {};
-                delete profile["permissions"];
-                this.$store.commit("setProfile", profile);
-
-                if (this.model.rememberMe) {
-                  this.$store.commit("setAccessToken", accessToken);
-                  this.$store.commit("removeExpired");
-                } else {
-                  this.$store.commit("setAccessToken", accessToken);
-                  this.$store.commit(
-                    "setExpired",
-                    new Date().getTime() + 86400000
-                  );
-                }
-
-                this.isSubmitting = false;
-              })
-              .catch((err) => {
-                swal
-                  .fire({
-                    icon: "error",
-                    title: "ลงชื่อเข้าใช้งานไม่สำเร็จ",
-                    confirmButtonText: "ตกลง",
-                    showCancelButton: false,
-                    buttonsStyling: false,
-                    customClass: {
-                      confirmButton: "btn btn-default",
-                      cancelButton: "btn btn-light",
-                      actions: "swal2-actions-center",
-                    },
-                  })
-                  .then(() => {
-                    this.isSubmitting = false;
-                  });
-              });
-          })
-          .catch((err) => {
-            swal
-              .fire({
-                icon: "error",
-                title: "Username หรือ Password ไม่ถูกต้อง",
-                confirmButtonText: "ตกลง",
-                showCancelButton: false,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "btn btn-default",
-                  cancelButton: "btn btn-light",
-                  actions: "swal2-actions-center",
-                },
-              })
-              .then(() => {
-                this.isSubmitting = false;
-              });
-          });
-      }
-    },
-  },
-};
+  // Initialize store when mounted
+  onMounted(() => {
+    useStore().commit('initializeStore');
+  });
 </script>
 
-<style>
-.login-swal2-icon {
-  border-color: transparent !important;
-}
-.swal2-actions-center {
-  justify-content: center !important;
-}
+<style scoped>
+  .login-swal2-icon {
+    border-color: transparent !important;
+  }
+  .swal2-actions-center {
+    justify-content: center !important;
+  }
 </style>
