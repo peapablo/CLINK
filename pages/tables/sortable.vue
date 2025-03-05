@@ -25,15 +25,18 @@
     </div>
   </div>
 </template>
-<script>
-  import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb'
-  import projects from '~/components/tables/projects'
-  import users from '~/components/tables/users'
-  import LightTable from "~/components/tables/RegularTables/LightTable";
-  import TranslucentTable from "~/components/tables/RegularTables/TranslucentTable";
-  import DarkTable from "~/components/tables/RegularTables/DarkTable";
 
-  export default {
+<script setup>
+  import { defineComponent } from 'vue';
+  import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb';
+  import LightTable from '~/components/tables/RegularTables/LightTable';
+  import TranslucentTable from '~/components/tables/RegularTables/TranslucentTable';
+  import DarkTable from '~/components/tables/RegularTables/DarkTable';
+
+  const projects = require('~/components/tables/projects').default;
+  const users = require('~/components/tables/users').default;
+
+  defineComponent({
     layout: 'DashboardLayout',
     components: {
       LightTable,
@@ -47,5 +50,5 @@
         users
       };
     }
-  };
+  });
 </script>
