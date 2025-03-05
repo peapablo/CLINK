@@ -43,27 +43,27 @@
               <div class="text-center text-muted mb-4">
                 <small>Or sign up with credentials</small>
               </div>
-              <validation-observer v-slot="{handleSubmit}" ref="formValidator">
+              <ValidationObserver v-slot="{ handleSubmit }">
                 <form role="form" @submit.prevent="handleSubmit(onSubmit)">
-                  <base-input alternative
+                  <BaseInput alternative
                               class="mb-3"
                               prepend-icon="ni ni-hat-3"
                               placeholder="Name"
                               name="Name"
                               :rules="{required: true}"
                               v-model="model.name">
-                  </base-input>
+                  </BaseInput>
 
-                  <base-input alternative
+                  <BaseInput alternative
                               class="mb-3"
                               prepend-icon="ni ni-email-83"
                               placeholder="Email"
                               name="Email"
                               :rules="{required: true, email: true}"
                               v-model="model.email">
-                  </base-input>
+                  </BaseInput>
 
-                  <base-input alternative
+                  <BaseInput alternative
                               class="mb-3"
                               prepend-icon="ni ni-lock-circle-open"
                               placeholder="password"
@@ -71,23 +71,23 @@
                               name="Password"
                               :rules="{required: true, min: 6}"
                               v-model="model.password">
-                  </base-input>
+                  </BaseInput>
                   <div class="text-muted font-italic"><small>password strength: <span
                     class="text-success font-weight-700">strong</span></small></div>
                   <div class="row my-4">
                     <div class="col-12">
-                      <base-input :rules="{ required: { allowFalse: false } }" name=Privacy Policy>
-                        <base-checkbox v-model="model.agree">
+                      <BaseInput :rules="{ required: { allowFalse: false } }" name="Privacy Policy">
+                        <BaseCheckbox v-model="model.agree">
                           <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                        </base-checkbox>
-                      </base-input>
+                        </BaseCheckbox>
+                      </BaseInput>
                     </div>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary mt-4">Create account</button>
                   </div>
                 </form>
-              </validation-observer>
+              </ValidationObserver>
             </div>
           </div>
         </div>
@@ -95,26 +95,31 @@
     </div>
   </div>
 </template>
-<script>
 
-  export default {
-    layout: 'AuthLayout',
-    name: 'register',
-    data() {
-      return {
-        model: {
-          name: '',
-          email: '',
-          password: '',
-          agree: false
-        }
-      }
-    },
-    methods: {
-      onSubmit() {
-        // this will be called only after form is valid. You can do an api call here to register users
+<script>
+import { ValidationObserver } from 'vee-validate'; // import ValidationObserver from vee-validate
+import BaseInput from '@/components/BaseInput.vue'; // adjust according to your path
+import BaseCheckbox from '@/components/BaseCheckbox.vue'; // adjust according to your path
+
+export default {
+  layout: 'AuthLayout',
+  name: 'register',
+  data() {
+    return {
+      model: {
+        name: '',
+        email: '',
+        password: '',
+        agree: false
       }
     }
-  };
+  },
+  methods: {
+    onSubmit() {
+      // this will be called only after form is valid. You can do an api call here to register users
+    }
+  }
+};
 </script>
-<style></style>
+
+<style scoped></style>
