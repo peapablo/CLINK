@@ -193,7 +193,7 @@
   </div>
 </template>
 <script>
-import swal from "sweetalert2";
+
 import BaseSlider from "@/components/argon-core/BaseSlider";
 import { BasePagination } from "@/components/argon-core";
 import clientPaginationMixin from "~/components/tables/PaginatedTables/clientPaginationMixin";

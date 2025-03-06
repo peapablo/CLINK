@@ -771,7 +771,7 @@ import { BasePagination } from "@/components/argon-core";
 import clientPaginationMixin from "~/components/tables/PaginatedTables/clientPaginationMixin";
 import axios from "axios";
 import { mappingApi } from "@/util/mappingApi";
-import swal from "sweetalert2";
+
 import { mapState } from "vuex";
 
 export default {

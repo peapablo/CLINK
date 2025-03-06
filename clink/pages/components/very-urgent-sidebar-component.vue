@@ -15,7 +15,7 @@
 
 <script>
 import { mapState } from "vuex";
-import swal from "sweetalert2";
+
 import "sweetalert2/dist/sweetalert2.css";
 
 export default {

@@ -442,7 +442,7 @@
 </template>
 
 <script>
-import swal from "sweetalert2";
+
 import FavoriteButton from "./components/favorite-button.vue";
 import BaseSlider from "@/components/argon-core/BaseSlider";
 import { BasePagination } from "@/components/argon-core";

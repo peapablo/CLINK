@@ -417,7 +417,7 @@ import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
 import { EventBus } from "@/util/event-bus";
-import swal from "sweetalert2";
+
 import moment from "moment";
 import { mapState } from "vuex";
 import FavoriteButton from "./components/favorite-button.vue";

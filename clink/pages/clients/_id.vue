@@ -277,7 +277,7 @@
   </div>
 </template>
 <script>
-import Swal from "sweetalert2";
+
 import FavoriteButton from "../components/favorite-button.vue";
 import axios from "axios";
 import { mapState } from "vuex";

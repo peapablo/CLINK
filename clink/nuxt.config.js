@@ -46,11 +46,12 @@ export default defineNuxtConfig({
     { src: "~/plugins/axios.client.ts", mode: "client" },
     { src: "~/plugins/dashboard/full-calendar.client.ts", mode: "client" },
     { src: "~/plugins/dashboard/world-map.client.ts", mode: "client" },
+    { src: "~/plugins/vue-sweetalert2.client.ts", mode: "client" }, // เพิ่ม plugin สำหรับ vue-sweetalert2
   ],
 
   modules: [
     "@vite-pwa/nuxt", 
-    "vue-sweetalert2/nuxt",  
+    "vue-sweetalert2/nuxt",  // เพิ่ม module สำหรับ sweetalert2
   ],
 
   pwa: {

@@ -439,9 +439,9 @@ import DashboardNavbar from "~/components/layouts/argon/DashboardNavbar.vue";
 import ContentFooter from "~/components/layouts/argon/ContentFooter.vue";
 import DashboardContent from "~/components/layouts/argon/Content.vue";
 import axios from "axios";
-import swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import { EventBus } from "@/util/event-bus";
-import "sweetalert2/dist/sweetalert2.css";
+import 'sweetalert2/dist/sweetalert2.min.css';
 import VeryUrgentSidebarComponent from "../pages/components/very-urgent-sidebar-component.vue";
 
 const INBOX_MENUS = [

@@ -389,7 +389,7 @@ import { mappingApi } from "@/util/mappingApi";
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
-import swal from "sweetalert2";
+
 import { EventBus } from "@/util/event-bus";
 import FavoriteButton from "./components/favorite-button.vue";
 

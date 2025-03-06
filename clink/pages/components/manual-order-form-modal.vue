@@ -744,7 +744,7 @@ import {
   Select,
   Option,
 } from "element-ui";
-import swal from "sweetalert2";
+
 import { mappingApi } from "@/util/mappingApi";
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";

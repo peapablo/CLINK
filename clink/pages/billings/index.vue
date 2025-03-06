@@ -468,7 +468,7 @@
   </div>
 </template>
 <script>
-import Swal from "sweetalert2";
+
 import FavoriteButton from "../components/favorite-button.vue";
 import { Modal, BaseAlert, BasePagination } from "@/components/argon-core";
 import clientPaginationMixin from "~/components/tables/PaginatedTables/clientPaginationMixin";
