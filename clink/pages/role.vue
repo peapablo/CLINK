@@ -563,7 +563,7 @@
 import BaseSlider from '@/components/argon-core/BaseSlider';
 import { Modal, BaseAlert, BasePagination } from '@/components/argon-core';
 import clientPaginationMixin from '~/components/tables/PaginatedTables/clientPaginationMixin';
-import axios from 'axios';
+import { ofetch } from 'ofetch';
 import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb';
 
 import {
@@ -659,7 +659,7 @@ export default {
         url: url,
         headers: { 'Content-Type': 'multipart/form-data' },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result['status'] == 'success') {
           this.modals.addNewRole = false;
           this.$swal('บันทึกสำเร็จค่ะ');
@@ -721,7 +721,7 @@ export default {
         url: url,
         headers: { 'Content-Type': 'multipart/form-data' },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result['status'] == 'success') {
           this.modals.editRole = false;
           this.$swal('บันทึกสำเร็จค่ะ');
@@ -738,8 +738,8 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.roleSelect = response.data;
-          this.tableData = response.data;
+          this.roleSelect = response;
+          this.tableData = response;
         })
         .catch(function (error) {
           // handle error

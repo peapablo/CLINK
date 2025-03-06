@@ -781,7 +781,7 @@ import {
 import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb';
 import { BasePagination } from '@/components/argon-core';
 import clientPaginationMixin from '~/components/tables/PaginatedTables/clientPaginationMixin';
-import axios from 'axios';
+import { ofetch } from 'ofetch';
 import swal from 'sweetalert2';
 
 export default {
@@ -973,7 +973,7 @@ export default {
         method: 'get',
         url: url  
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) {
           this.currentLab = result[0];
           if(this.currentLab['TEST_PRIMARY_ID'] == null || this.currentLab['TEST_PRIMARY_ID'] == '' || this.currentLab['STATUS'] < 2){

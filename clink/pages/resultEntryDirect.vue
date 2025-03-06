@@ -548,7 +548,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result.data != null && result.data != "") {
           this.resultlistData = [...result.data];
         } else this.resultlistData == [];
@@ -559,7 +559,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result.data != null && result.data != "") {
           this.organismlistData = [...result.data];
         } else this.organismlistData == [];
@@ -570,7 +570,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        this.nogrowthlistData = response.data;
+        this.nogrowthlistData = response;
       });
 
       url =
@@ -581,7 +581,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         let currentLabInfo;
         for (let i = 0; i < result.length; i++) {
           if (result[i].id === this.currentLabId) {
@@ -608,7 +608,7 @@ export default {
             method: "get",
             url: url2,
           }).then((response) => {
-            const result = response.data;
+            const result = response;
             if (result.data != null && result.data != "") {
               let resultEntrys = result.data;
               this.secondaryTestData = [...resultEntrys];
@@ -641,7 +641,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (
           result.status != "" &&
           result.status == "success" &&
@@ -706,7 +706,7 @@ export default {
               data: formData,
               headers: { "Content-Type": "multipart/form-data" },
             }).then((response) => {
-              const result = response.data;
+              const result = response;
             });
             swal.fire(buttonText, "", "success");
           } else if (result.isDenied) {
@@ -743,7 +743,7 @@ export default {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
           }).then((response) => {
-            const result = response.data;
+            const result = response;
           });
         });
         if (showPopup) swal.fire("Lab Result successfully saved.");

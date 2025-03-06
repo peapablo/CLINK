@@ -332,7 +332,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result != null) {
           let labels = [];
           let data = [];
@@ -391,7 +391,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         // console.log(result);
         if (result != null) {
           let labels = [];
@@ -439,7 +439,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableCategories = response.data;
+          this.filtersTableCategories = response;
         })
         .catch(function (error) {
           // handle error
@@ -456,7 +456,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableTestPrimaryData = response.data;
+          this.filtersTableTestPrimaryData = response;
         })
         .catch(function (error) {
           // handle error
@@ -472,7 +472,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableSpecimen = response.data;
+          this.filtersTableSpecimen = response;
         })
         .catch(function (error) {
           // handle error
@@ -490,7 +490,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) this.tableDataBodySite = result;
         else this.tableDataBodySite = [];
       });

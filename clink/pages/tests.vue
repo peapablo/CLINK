@@ -391,7 +391,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          const { id: dataId, title, test_primary } = response.data;
+          const { id: dataId, title, test_primary } = response;
 
           this.formModal.id = dataId;
           this.formModal.title = title;
@@ -571,7 +571,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
 
         let tmpTableData = [];
         result
@@ -596,7 +596,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.categories = response.data;
+          this.categories = response;
         })
         .catch((err) => {
           console.log("getCategories error:", err);

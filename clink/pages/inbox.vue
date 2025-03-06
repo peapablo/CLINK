@@ -600,7 +600,7 @@ export default {
             url: url,
             headers: { "Content-Type": "multipart/form-data" },
           }).then((response) => {
-            const result = response.data;
+            const result = response;
             if (result) {
               this.$swal({
                 icon: "success",
@@ -628,9 +628,9 @@ export default {
       this.$store.commit("getUrgentAmount");
 
       // const url = this.$store.state.urlBase + "/api/order/total-very-urgent";
-      // axios.get(url).then((response) => {
-      //   const urgentAmount = response.data?.amount_new_order ?? 0;
-      //   const orderIds = response.data?.very_urgent_order_id ?? {};
+      // ofetch(url).then((response) => {
+      //   const urgentAmount = response?.amount_new_order ?? 0;
+      //   const orderIds = response?.very_urgent_order_id ?? {};
 
       //   this.$store.commit("setUrgentAmount", urgentAmount);
       //   this.$store.commit("setUrgentOrderIds", orderIds);
@@ -1115,7 +1115,7 @@ export default {
       //   { responseType: "blob" }
       // ).then((response) => {
       //   const url = URL.createObjectURL(
-      //     new Blob([response.data], {
+      //     new Blob([response], {
       //       type: "application/csv",
       //     })
       //   );
@@ -1153,7 +1153,7 @@ export default {
         url: url,
         headers: { 'Content-Type': 'multipart/form-data' },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) {
           let tmpTableDataInbox = [];
           let tmpTableDataCheckIn = [];
@@ -1224,7 +1224,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
 
         //console.log(result);
         if (result) {
@@ -1278,7 +1278,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableCategories = response.data;
+          this.filtersTableCategories = response;
         })
         .catch(function (error) {
           // handle error
@@ -1294,7 +1294,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableTestPrimaryData = response.data;
+          this.filtersTableTestPrimaryData = response;
         })
         .catch(function (error) {
           // handle error
@@ -1311,7 +1311,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.filtersTableSpecimen = response.data;
+          this.filtersTableSpecimen = response;
         })
         .catch(function (error) {
           // handle error
@@ -1329,7 +1329,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) this.tableDataBodySite = result;
         else this.tableDataBodySite = [];
       });
@@ -1342,7 +1342,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) {
           let tmpTableWaitingData = [];
           let tmpTableRejectData = [];
@@ -1391,7 +1391,7 @@ export default {
           data: formData,
           headers: { "Content-Type": "multipart/form-data" },
         }).then((response) => {
-          const result = response.data;
+          const result = response;
           if (result["status"] == "success") {
             return true;
           } else {
@@ -1416,7 +1416,7 @@ export default {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result["status"] == "success") {
           this.$notify({
             type: "success",
@@ -1441,7 +1441,7 @@ export default {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result["status"] == "success") {
           this.$notify({ type: "success", message: "บันทึก Body Site สำเร็จ" });
         } else {
@@ -1468,7 +1468,7 @@ export default {
           data: formData,
           headers: { "Content-Type": "multipart/form-data" },
         }).then((response) => {
-          const result = response.data;
+          const result = response;
           if (result["status"] == "success") {
             this.searchFrom();
 
@@ -1495,7 +1495,7 @@ export default {
     //   axios
     //     .get(url)
     //     .then((response) => {
-    //       const result = response.data;
+    //       const result = response;
     //       this.Allow_CheckIn = parseInt(result["ALLOW_CHECKIN"]);
     //       console.log(this.Allow_CheckIn);
     //     })

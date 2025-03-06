@@ -654,7 +654,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.specimenData = response.data;
+          this.selectData.specimenData = response;
 
           let data = [];
           if (this.selectData.specimenData != null) {
@@ -679,7 +679,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.categoryData = response.data;
+          this.selectData.categoryData = response;
         })
         .catch(function (error) {
           // handle error
@@ -697,7 +697,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result !== null) {
           let tmpTableData = result;
           this.selectData.clientData = tmpTableData;
@@ -748,11 +748,11 @@ export default {
           this.loadData();
         })
         .catch((error) => {
-          if (error.response.data.message) {
+          if (error.response.message) {
             Swal.fire({
               icon: "error",
               title: "Edit Client Failed",
-              text: error.response.data.message,
+              text: error.response.message,
             });
           } else {
             Swal.fire({
@@ -862,11 +862,11 @@ export default {
               });
             })
             .catch((error) => {
-              if (error.response.data.message) {
+              if (error.response.message) {
                 Swal.fire({
                   icon: "error",
                   title: "Create Quotation Failed",
-                  text: Object.values(error.response.data.errors)
+                  text: Object.values(error.response.errors)
                     .map((item) => item[0])
                     .join(", "),
                 });
@@ -956,11 +956,11 @@ export default {
               });
             })
             .catch((error) => {
-              if (error.response.data.message) {
+              if (error.response.message) {
                 Swal.fire({
                   icon: "error",
                   title: "Create invoice failed",
-                  text: Object.values(error.response.data.errors)
+                  text: Object.values(error.response.errors)
                     .map((item) => item[0])
                     .join(", "),
                 });
@@ -1016,11 +1016,11 @@ export default {
               });
             })
             .catch((error) => {
-              if (error.response.data.message) {
+              if (error.response.message) {
                 Swal.fire({
                   icon: "error",
                   title: "Delete Quotation Failed",
-                  text: Object.values(error.response.data.errors)
+                  text: Object.values(error.response.errors)
                     .map((item) => item[0])
                     .join(", "),
                 });
@@ -1076,11 +1076,11 @@ export default {
               });
             })
             .catch((error) => {
-              if (error.response.data.message) {
+              if (error.response.message) {
                 Swal.fire({
                   icon: "error",
                   title: "Delete Invoice Failed",
-                  text: Object.values(error.response.data.errors)
+                  text: Object.values(error.response.errors)
                     .map((item) => item[0])
                     .join(", "),
                 });
@@ -1114,7 +1114,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          const responseProfile = response.data ?? {};
+          const responseProfile = response ?? {};
           const profileWithoutPermissions = {
             ...responseProfile,
             permissions: [],
@@ -1158,7 +1158,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result !== null) {
           let tmpTableData = result.reduce((acc, item) => {
             const hasFindedQuotation =

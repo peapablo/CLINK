@@ -1,22 +1,6 @@
-import { defineNuxtConfig } from "nuxt/config";
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  ssr: true, // เปิดใช้งาน SSR
-
-  target: "static", // คล้ายกับ Nuxt 2
-
-  devServer: {
-    port: 3000, // default: 3000
-    host: "0.0.0.0", // ใช้ได้เหมือน Nuxt 2
-  },
-
-  router: {
-    options: {
-      base: "/",
-    },
-    linkExactActiveClass: "active",
-  },
-
   runtimeConfig: {
     public: {
       VUE_APP_AUTH_CLIENT_ID: process.env.VUE_APP_AUTH_CLIENT_ID,
@@ -50,46 +34,39 @@ export default defineNuxtConfig({
     },
   },
 
-  loading: {
-    color: "#fff",
-  },
-
   css: [
-    "@/assets/css/nucleo/css/nucleo.css",
-    "@/assets/css/font-awesome/css/font-awesome.css",
-    "@/assets/sass/argon.scss",
-    "@/assets/css/style.css",
+    "assets/css/nucleo/css/nucleo.css",
+    "assets/css/font-awesome/css/font-awesome.css",
+    "assets/sass/argon.scss",
+    "assets/css/style.css",
   ],
 
   plugins: [
-    { src: "@/plugins/dashboard/dashboard-plugin", mode: "client" },
-    { src: "@/plugins/axios", mode: "client" },
-    { src: "@/plugins/dashboard/full-calendar", mode: "client" },
-    { src: "@/plugins/dashboard/world-map", mode: "client" },
+    "~/plugins/dashboard/dashboard-plugin",
+    { src: "~/plugins/axios.client.ts", mode: "client" },
+    { src: "~/plugins/dashboard/full-calendar.client.ts", mode: "client" },
+    { src: "~/plugins/dashboard/world-map.client.ts", mode: "client" },
   ],
 
   modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/pwa",
-    "vue-sweetalert2/nuxt",
+    "@vite-pwa/nuxt", 
+    "vue-sweetalert2/nuxt",  
   ],
 
-  axios: {
-    baseURL: process.env.API_BASE_URL || "https://api.example.com",
+  pwa: {
+    manifest: {
+      name: "My Nuxt App",
+      short_name: "NuxtApp",
+      description: "My awesome Nuxt 3 app",
+      theme_color: "#ffffff",
+    },
+    registerType: 'autoUpdate',
+    workbox: {
+      navigateFallback: "/index.html",
+    }
   },
 
   build: {
     transpile: ["vee-validate/dist/rules"],
-    extractCSS: process.env.NODE_ENV === "production",
-  },
-
-  vite: {
-    build: {
-      cssCodeSplit: true,
-    },
-  },
-
-  nitro: {
-    preset: "node-server",
-  },
+  }
 });

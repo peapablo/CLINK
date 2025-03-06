@@ -503,7 +503,7 @@ export default {
               url: url,
               headers: { "Content-Type": "multipart/form-data" },
             }).then((response) => {
-              const result = response.data;
+              const result = response;
               if (result["status"] == "success") {
                 this.$swal("แก้ไขสำเร็จค่ะ");
                 return true;
@@ -523,7 +523,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.select.breakpointroomData = response.data;
+          this.select.breakpointroomData = response;
         })
         .catch(function (error) {
           // try catch error
@@ -541,7 +541,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result != null) {
           let tmpTableData = [];
           result["data"].forEach((element) => {
@@ -569,7 +569,7 @@ export default {
       )
         .then((response) => {
           const url = URL.createObjectURL(
-            new Blob([response.data], {
+            new Blob([response], {
               type: "application/csv",
             })
           );

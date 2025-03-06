@@ -1084,7 +1084,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result !== null && result !== "") {
 					this.resultlistData = [...result];
 				} else {
@@ -1100,7 +1100,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result.data !== null && result.data !== "") {
 					this.organismlistData = [...result.data];
 				} else this.organismlistData == [];
@@ -1114,7 +1114,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result.data !== null && result.data !== "") {
 					this.devicesenselistData = [...result.data];
 				} else this.devicesenselistData == [];
@@ -1127,7 +1127,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result.data !== null && result.data !== "") {
 					this.deviceidenlistData = [...result.data];
 				} else this.deviceidenlistData == [];
@@ -1141,7 +1141,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result.data !== null && result.data !== "") {
 					this.antibioticlistData = [...result.data];
 				} else this.antibioticlistData == [];
@@ -1155,7 +1155,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				let currentLabInfo;
 				currentLabInfo = result[0];
 				if (result) {
@@ -1168,7 +1168,7 @@ export default {
 						method: "get",
 						url: url2,
 					}).then((response) => {
-						const result = response.data;
+						const result = response;
 						if (result.data !== null && result.data !== "") {
 							let resultEntrys = result.data;
 							this.secondaryTestData = [...resultEntrys];
@@ -1235,7 +1235,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (
 					result.status !== "" &&
 					result.status == "success" &&
@@ -1287,7 +1287,7 @@ export default {
 							url: newDataUrl,
 						})
 							.then((response) => {
-								const result = response.data;
+								const result = response;
 
 								let resultAntibioticEntrys = result.data;
 								if (resultAntibioticEntrys !== null) {
@@ -1359,7 +1359,7 @@ export default {
 							data: formData,
 							headers: { "Content-Type": "multipart/form-data" },
 						}).then((response) => {
-							const result = response.data;
+							const result = response;
 							this.fetchData();
 						});
 						swal.fire(buttonText, "", "success");
@@ -1387,7 +1387,7 @@ export default {
 						data: formData,
 						headers: { "Content-Type": "multipart/form-data" },
 					}).then((response) => {
-						const result = response.data;
+						const result = response;
 					});
 				});
 				this.fetchData();
@@ -1432,7 +1432,7 @@ export default {
 						data: formData,
 						headers: { "Content-Type": "multipart/form-data" },
 					}).then((response) => {
-						const result = response.data;
+						const result = response;
 					});
 				});
 				this.fetchData();
@@ -1502,7 +1502,7 @@ export default {
 					headers: { "Content-Type": "multipart/form-data" },
 				});
 
-				const result = response.data;
+				const result = response;
 				const rulesDetect = result.rule_results.filter(
 					(rule) => rule[0].type === "true"
 				);
@@ -1650,7 +1650,7 @@ export default {
 				method: "get",
 				url: url,
 			}).then((response) => {
-				const result = response.data;
+				const result = response;
 				if (result.status !== "" && result.status == "success") {
 					this.step = 1;
 					this.currentASTRow = row;

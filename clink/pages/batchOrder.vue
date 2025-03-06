@@ -537,7 +537,7 @@ export default {
                   headers: { "Content-Type": "multipart/form-data" },
                 })
                   .then((response) => {
-                    const result = response.data;
+                    const result = response;
                     if (result["status"] !== "success") this.chkSuccess = false;
 
                     if (chkSuccess) {
@@ -642,7 +642,7 @@ export default {
           params,
         })
         .then((response) => {
-          this.select.locationData = response.data;
+          this.select.locationData = response;
         })
         .catch(function (error) {
           // handle error
@@ -663,7 +663,7 @@ export default {
           params,
         })
         .then((response) => {
-          this.select.bodySiteData = response.data;
+          this.select.bodySiteData = response;
         })
         .catch(function (error) {
           // handle error
@@ -680,7 +680,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.select.specimenData = response.data;
+          this.select.specimenData = response;
         })
         .catch(function (error) {
           // handle error
@@ -698,7 +698,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result !== null) {
           let tmpTableData = result;
           this.select.clientList = tmpTableData;
@@ -712,7 +712,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.select.primaryTestData = response.data;
+          this.select.primaryTestData = response;
         })
         .catch(function (error) {
           // handle error

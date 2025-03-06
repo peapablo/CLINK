@@ -1085,9 +1085,9 @@ export default {
     },
     getUrgentAmount() {
       const url = this.$store.state.urlBase + "/api/order/total-very-urgent";
-      axios.get(url).then((response) => {
-        const urgentAmount = response.data?.amount ?? 0;
-        const orderIds = response.data?.order_id ?? [];
+      ofetch(url).then((response) => {
+        const urgentAmount = response?.amount ?? 0;
+        const orderIds = response?.order_id ?? [];
 
         this.$store.commit("setUrgentAmount", urgentAmount);
         this.$store.commit("setUrgentOrderIds", orderIds);
@@ -1170,7 +1170,7 @@ export default {
                     data: formData,
                     headers: { "Content-Type": "multipart/form-data" },
                   }).then((response) => {
-                    const result = response.data;
+                    const result = response;
                     if (result["status"] != "success") this.chkSuccess = false;
                   });
 
@@ -1387,7 +1387,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.titleSelect = response.data;
+          this.titleSelect = response;
         })
         .catch(function (error) {
           // handle error
@@ -1405,7 +1405,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.locationSelect = response.data;
+          this.locationSelect = response;
         })
         .catch(function (error) {
           // handle error
@@ -1423,7 +1423,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.prioritySelect = response.data;
+          this.prioritySelect = response;
         })
         .catch(function (error) {
           // handle error
@@ -1441,7 +1441,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.bodySiteGroupSelect = response.data;
+          this.bodySiteGroupSelect = response;
         })
         .catch(function (error) {
           // handle error
@@ -1459,8 +1459,8 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.bodySiteSelect = response.data;
-          this.filterBodySite = response.data;
+          this.bodySiteSelect = response;
+          this.filterBodySite = response;
         })
         .catch(function (error) {
           // handle error
@@ -1477,7 +1477,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.specimenCheckbox = response.data;
+          this.specimenCheckbox = response;
         })
         .catch(function (error) {
           // handle error
@@ -1494,7 +1494,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.directExaminationTestCheckbox = response.data;
+          this.directExaminationTestCheckbox = response;
         })
         .catch(function (error) {
           // handle error
@@ -1509,7 +1509,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.profileTests = response.data;
+          this.profileTests = response;
         })
         .catch((error) => {
           console.log("getProfileTests: " + error);
@@ -1523,7 +1523,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result !== null) {
           let tmpTableData = result;
           this.clientSelect = tmpTableData;
@@ -1539,7 +1539,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.logHistory = response.data;
+          this.logHistory = response;
         })
         .catch((error) => {
           console.log("getLogHistory: " + error);

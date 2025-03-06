@@ -382,7 +382,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          const responseProfile = response.data ?? {};
+          const responseProfile = response ?? {};
           const profileWithoutPermissions = {
             ...responseProfile,
             permissions: [],
@@ -483,7 +483,7 @@ export default {
           headers: { "Content-Type": "application/json" },
         })
           .then((response) => {
-            const result = response.data;
+            const result = response;
             if (!!result) {
               this.tax_id = result.tax_id.split("");
               this.business_type = result.business_type;
@@ -504,11 +504,11 @@ export default {
             }
           })
           .catch((error) => {
-            if (error.response.data.message) {
+            if (error.response.message) {
               Swal.fire({
                 icon: "error",
                 title: "Client Fetch Failed",
-                text: error.response.data.message,
+                text: error.response.message,
               });
             } else {
               Swal.fire({
@@ -529,7 +529,7 @@ export default {
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => {
-          const result = response.data;
+          const result = response;
           if (result !== null) {
             let tmpData = result;
             this.provinceOptions = tmpData.map((item) => {
@@ -555,7 +555,7 @@ export default {
           headers: { "Content-Type": "application/json" },
         })
           .then((response) => {
-            const result = response.data;
+            const result = response;
             if (result !== null) {
               let tmpData = result;
               this.districtOptions = tmpData.map((item) => {
@@ -582,7 +582,7 @@ export default {
           headers: { "Content-Type": "application/json" },
         })
           .then((response) => {
-            const result = response.data;
+            const result = response;
             if (result !== null) {
               let tmpData = result;
               this.subDistrictOptions = tmpData.map((item) => {
@@ -631,7 +631,7 @@ export default {
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
-          const result = response.data;
+          const result = response;
           if (result !== null) {
             Swal.fire({
               icon: "success",
@@ -643,11 +643,11 @@ export default {
           }
         })
         .catch((error) => {
-          if (error.response.data.message) {
+          if (error.response.message) {
             Swal.fire({
               icon: "error",
               title: "Client Creation Failed",
-              text: Object.values(error.response.data.errors)
+              text: Object.values(error.response.errors)
                 .map((item) => item[0])
                 .join(", "),
             });
@@ -689,7 +689,7 @@ export default {
         },
       })
         .then((response) => {
-          const result = response.data;
+          const result = response;
           if (result !== null) {
             Swal.fire({
               icon: "success",
@@ -702,11 +702,11 @@ export default {
           }
         })
         .catch((error) => {
-          if (error.response.data.message) {
+          if (error.response.message) {
             Swal.fire({
               icon: "error",
               title: "Client Update Failed",
-              text: Object.values(error.response.data.errors)
+              text: Object.values(error.response.errors)
                 .map((item) => item[0])
                 .join(", "),
             });

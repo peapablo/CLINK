@@ -1284,7 +1284,7 @@ export default {
         method: "get",
         url: url,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
 
         let tmpTableData = [];
         result.forEach((element) => {
@@ -1301,7 +1301,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.locationSelect = response.data;
+          this.locationSelect = response;
         })
         .catch(function (error) {
           // handle error
@@ -1314,7 +1314,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.permissions = response.data;
+          this.permissions = response;
         })
         .catch((err) => {
           console.log("getPermissions error:", err);

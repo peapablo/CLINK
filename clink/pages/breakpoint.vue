@@ -669,7 +669,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result["status"] == "success") {
           this.modals.addNewBreakpoint = false;
           this.$swal("Save successfully");
@@ -725,7 +725,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result["status"] == "success") {
           this.modals.editBreakpoint = false;
           this.formModalEditBreakpoint.breakpoint_id = "";
@@ -767,7 +767,7 @@ export default {
           url: url,
           headers: { "Content-Type": "multipart/form-data" },
         }).then((response) => {
-          const result = response.data;
+          const result = response;
           if (result["status"] == "success") {
             this.$swal("ลบรายการสำเร็จ");
             this.loadData();
@@ -795,7 +795,7 @@ export default {
       )
         .then((response) => {
           const url = URL.createObjectURL(
-            new Blob([response.data], {
+            new Blob([response], {
               type: "application/csv",
             })
           );
@@ -841,7 +841,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         console.log(result);
         if (result["status"] == "success") {
           this.$swal("Save successfully");
@@ -864,7 +864,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result != null) {
           let tmpTableData = [];
           result.forEach((element) => {

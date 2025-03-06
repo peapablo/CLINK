@@ -709,7 +709,7 @@ export default {
         headers: { "Content-Type": "multipart/form-data" },
         data: bodyFormData,
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result.status == "success") {
           this.fetchData();
           this.modals.form = false;
@@ -767,7 +767,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) {
           let tmpTableData = [];
           result.forEach((element) => {
@@ -829,7 +829,7 @@ export default {
         url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result) {
           let tmpTableData = [];
           result.forEach((element) => {
@@ -850,7 +850,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.statusData = response.data;
+          this.selectData.statusData = response;
           this.selectedStatus = 2;
         })
         .catch(function (error) {
@@ -868,7 +868,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.patternData = response.data;
+          this.selectData.patternData = response;
           //console.log(this.selectData.patternData);
         })
         .catch(function (error) {
@@ -886,7 +886,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.testData = response.data;
+          this.selectData.testData = response;
 
           let data = [];
           let tmpdata = [];
@@ -912,7 +912,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.wardData = response.data;
+          this.selectData.wardData = response;
         })
         .catch(function (error) {
           // handle error
@@ -929,7 +929,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.nogrowthData = response.data;
+          this.selectData.nogrowthData = response;
         })
         .catch(function (error) {
           // handle error
@@ -946,7 +946,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.categoryData = response.data;
+          this.selectData.categoryData = response;
           let data = [];
           if (this.selectData.categoryData != null) {
             this.selectData.categoryData.forEach((element) => {
@@ -970,7 +970,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.selectData.specimenData = response.data;
+          this.selectData.specimenData = response;
 
           let data = [];
           if (this.selectData.specimenData != null) {

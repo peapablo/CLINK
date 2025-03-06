@@ -409,6 +409,7 @@
 </template>
 <script>
 /* eslint-disable no-new */
+import { ofetch } from 'ofetch';
 import Vue from "vue";
 import PerfectScrollbar from "perfect-scrollbar";
 import ManualOrderFormModal from "../pages/components/manual-order-form-modal.vue";
@@ -432,6 +433,7 @@ function initScrollbar(className) {
     }, 100);
   }
 }
+
 
 import DashboardNavbar from "~/components/layouts/argon/DashboardNavbar.vue";
 import ContentFooter from "~/components/layouts/argon/ContentFooter.vue";
@@ -478,11 +480,13 @@ export default {
       statAppUrl: process.env.VUE_APP_STAT_APP_URL, // Assign environment variable to data property
     };
   },
+
   mounted() {
     this.initScrollbar();
     this.getUserPermissions();
     this.getUrgentAmount();
     this.assignGraphReport();
+    this.fetchData();
   },
   methods: {
     assignGraphReport() {
@@ -559,7 +563,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          const responseProfile = response.data ?? {};
+          const responseProfile = response ?? {};
           const profileWithoutPermissions = {
             ...responseProfile,
             permissions: [],
@@ -605,9 +609,9 @@ export default {
       this.hasLoaded = false;
 
       const url = this.$store.state.urlBase + "/api/order/total-very-urgent";
-      axios.get(url).then((response) => {
-        const urgentAmount = response.data?.amount_new_order ?? 0;
-        const orderIds = response.data?.very_urgent_order_id ?? {};
+      ofetch(url).then((response) => {
+        const urgentAmount = response?.amount_new_order ?? 0;
+        const orderIds = response?.very_urgent_order_id ?? {};
 
         this.$store.commit("setUrgentAmount", urgentAmount);
         this.$store.commit("setUrgentOrderIds", orderIds);

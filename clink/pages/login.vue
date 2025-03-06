@@ -103,7 +103,7 @@
 
 <script setup>
   import { ref, watch, onMounted } from 'vue';
-  import axios from 'axios';
+  import { ofetch } from 'ofetch';
   import swal from 'sweetalert2';
   import 'sweetalert2/dist/sweetalert2.css';
 
@@ -160,9 +160,9 @@
 
       try {
         const response = await axios.post(url, bodyFormData);
-        const { access_token: accessToken } = response.data;
+        const { access_token: accessToken } = response;
 
-        const profileResponse = await axios.get(`${useStore().state.urlBase}/api/auth/me`, {
+        const profileResponse = await ofetch(`${useStore().state.urlBase}/api/auth/me`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
 

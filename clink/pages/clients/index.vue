@@ -242,7 +242,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          const responseProfile = response.data ?? {};
+          const responseProfile = response ?? {};
           const profileWithoutPermissions = {
             ...responseProfile,
             permissions: [],
@@ -269,7 +269,7 @@ export default {
         headers: { "Content-Type": "application/json" },
         params: { search: this.searchText },
       }).then((response) => {
-        const result = response.data;
+        const result = response;
         if (result !== null) {
           let tmpTableData = result;
           this.tableData = tmpTableData;
@@ -285,7 +285,7 @@ export default {
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((response) => {
-          const result = response.data;
+          const result = response;
           if (result !== null) {
             Swal.fire({
               title: "Success",
@@ -348,7 +348,7 @@ export default {
       axios
         .get(url, { responseType: "blob" })
         .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const url = window.URL.createObjectURL(new Blob([response]));
           const link = document.createElement("a");
           link.href = url;
           link.setAttribute("download", "clients.xlsx");
