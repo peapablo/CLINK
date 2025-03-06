@@ -93,7 +93,7 @@
     </div>
 </template>
 <script>
-  import projects from './../projects'
+  import projects from '../projects'
   import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
   export default {
     name: 'light-table',

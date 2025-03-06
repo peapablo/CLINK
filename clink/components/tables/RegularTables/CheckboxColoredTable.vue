@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-  import users from './../users'
+  import users from '../users'
   import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown, Tooltip } from 'element-ui'
 
   export default {

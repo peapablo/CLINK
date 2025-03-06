@@ -3,46 +3,39 @@
     <div class="card-header border-0">
       <div class="row">
         <div class="col-6">
-          <h3 class="mb-0">Checkbox + Toggles</h3>
+          <h3 class="mb-0">Striped Table</h3>
         </div>
         <div class="col-6 text-right">
-          <el-tooltip content="Delete" placement="top">
-            <base-button type="danger" icon size="sm">
-              <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-              <span class="btn-inner--text">Delete</span>
+          <el-tooltip content="Export" placement="top">
+            <base-button type="primary" icon size="sm">
+              <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+              <span class="btn-inner--text">Export</span>
             </base-button>
           </el-tooltip>
         </div>
       </div>
     </div>
 
-    <el-table class="table-responsive table-flush"
+    <el-table class="table-responsive align-items-center table-flush table-striped"
               header-row-class-name="thead-light"
-              row-key="id"
-              :data="users"
-              @selection-change="onSelectionChange">
-      <el-table-column type="selection"
-                       align="left"
-                       min-width="120px">
-      </el-table-column>
-
+              :data="users">
       <el-table-column label="Author"
-                       min-width="220px"
+                       min-width="310px"
                        prop="name"
                        sortable>
         <template v-slot="{row}">
+          <img :src="row.image" class="avatar rounded-circle mr-3">
           <b>{{row.name}}</b>
         </template>
       </el-table-column>
       <el-table-column label="Created At"
                        prop="createdAt"
-                       width="170px"
                        min-width="140px"
                        sortable>
       </el-table-column>
 
       <el-table-column label="Product"
-                       min-width="180px"
+                       min-width="200px"
                        prop="product"
                        sortable>
         <template v-slot="{row}">
@@ -50,23 +43,27 @@
         </template>
       </el-table-column>
 
-      <el-table-column min-width="120px"
-                       label="Active"
-                       prop="active"
-                       sortable
-                       align="center">
-        <template v-slot="{row}">
-          <div class="d-flex justify-content-center">
-            <base-switch v-model="row.active"></base-switch>
-          </div>
-        </template>
+      <el-table-column min-width="180px" align="center">
+        <div slot-scope="{row}" class="table-actions">
+          <el-tooltip content="Edit" placement="top">
+            <a href="#!" @click.prevent="onEdit(row)" class="table-action" data-toggle="tooltip" data-original-title="Edit product">
+              <i class="fas fa-user-edit"></i>
+            </a>
+          </el-tooltip>
+          <el-tooltip content="Delete" placement="top">
+            <a href="#!" @click.prevent="onDelete(row)" class="table-action table-action-delete" data-toggle="tooltip"
+               data-original-title="Delete product">
+              <i class="fas fa-trash"></i>
+            </a>
+          </el-tooltip>
+        </div>
       </el-table-column>
     </el-table>
 
   </div>
 </template>
 <script>
-  import users from './../users'
+  import users from '../users'
   import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown, Tooltip } from 'element-ui'
 
   export default {
@@ -82,8 +79,7 @@
     data() {
       return {
         users,
-        currentPage: 1,
-        selectedRows: []
+        currentPage: 1
       };
     },
     methods: {
@@ -93,9 +89,6 @@
       onDelete(row) {
         alert(`You want to delete ${row.name}`)
       },
-      onSelectionChange(selectedRows) {
-        this.selectedRows = selectedRows
-      }
     }
   }
 </script>

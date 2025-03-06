@@ -1,11 +1,11 @@
 <template>
-    <div class="card">
-        <div class="border-0 card-header">
-            <h3 class="mb-0">Light table</h3>
+    <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0 text-white">Dark table</h3>
         </div>
 
-        <el-table class="table-responsive table-flush"
-                  header-row-class-name="thead-light"
+        <el-table class="table-responsive table-dark"
+                  header-row-class-name="thead-dark"
                   :data="projects">
             <el-table-column label="Project"
                              min-width="310px"
@@ -33,7 +33,7 @@
                              prop="status"
                              sortable>
                 <template v-slot="{row}">
-                    <badge class="badge-dot mr-4" type="">
+                    <badge class="badge-dot mr-4">
                         <i :class="`bg-${row.statusType}`"></i>
                         <span class="status">{{row.status}}</span>
                     </badge>
@@ -90,13 +90,10 @@
             </el-table-column>
         </el-table>
 
-        <div class="card-footer py-4 d-flex justify-content-end">
-            <base-pagination v-model="currentPage" :total="50"></base-pagination>
-        </div>
     </div>
 </template>
 <script>
-  import projects from './../projects'
+  import projects from '../projects'
   import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
   export default {
     name: 'light-table',

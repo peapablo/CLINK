@@ -1,75 +1,65 @@
-# Nuxt Minimal Starter
+# README #
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This README would normally document whatever steps are necessary to get your application up and running.
 
-## Setup
+### What is this repository for? ###
 
-Make sure to install dependencies:
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-```bash
-# npm
-npm install
+### How do I get set up? ###
 
-# pnpm
-pnpm install
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
+* Deployment instructions
 
-# yarn
+### Contribution guidelines ###
+
+* Writing tests
+* Code review
+* Other guidelines
+
+### Who do I talk to? ###
+
+* Repo owner or admin
+* Other community or team contact
+# ofd_clinag
+
+## Prerequisite
+Node: v14.17.3
+
+Yarn: 1.22.11
+
+Nuxt: v2.15.2  
+
+vue/cli: 4.5.13
+
+## Project setup
+```
 yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
+### Compiles and hot-reloads for development
+```
 yarn dev
 
-# bun
-bun run dev
-```
+# Project architecture
 
-## Production
+## Order of code
+- Template (HTML)
+- Script (Typescript)
+- Style (SCSS)
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Order of function
+- components
+- props
+- validate
+- data
+- computed
+- lifecycle
+- watch
+- methods
