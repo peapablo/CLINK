@@ -7,138 +7,23 @@
         <div class="favorite-button-container">
           <favorite-button path="/batchOrder" />
         </div>
-        <!--
-        <div class="row align-items-center">
-          <div class="col-auto mb-3">
-            <div class="d-flex flex-row align-items-center">
-              <base-input
-                label="Select date"
-                class="text-white font-weight-bold"
-                style="color:white;"
-              >
-                <flat-picker
-                  slot-scope="{ focus, blur }"
-                  @on-open="focus"
-                  @on-close="blur"
-                  :config="flatPickerConfig"
-                  class="form-control datepicker"
-                  v-model="dateFrom"
-                >
-                </flat-picker>
-              </base-input> 
-              <base-input
-                label="Date from"
-                class="mx-4 text-white"
-                style="color:white;"
-              >
-                <flat-picker
-                  slot-scope="{ focus, blur }"
-                  @on-open="focus"
-                  @on-close="blur"
-                  :config="flatPickerConfig"
-                  class="form-control datepicker"
-                  v-model="dateTo"
-                >
-                </flat-picker>
-              </base-input>
-              &nbsp;&nbsp;
-              <base-input label="Round">
-                  <el-select
-                    placeholder="Round"
-                    v-model="searchRound"
-                  >
-                    <el-option value="1">1</el-option>
-                    <el-option value="2">2</el-option>
-                    <el-option value="3">3</el-option>
-                    <el-option value="4">4</el-option>
-                    <el-option value="5">5</el-option>
-                    <el-option value="6">6</el-option>
-                    <el-option value="7">7</el-option>
-                    <el-option value="8">8</el-option>
-                    <el-option value="9">9</el-option>
-                    <el-option value="10">10</el-option>
-                  </el-select>
-                </base-input> &nbsp;&nbsp;
-              <div>
-                <base-button
-                  outline
-                  icon
-                  class="text-white"
-                  type="default"
-                  style="border:1px solid white;"
-                >
-                  <span class="btn-inner--icon"><i class="fas fa-search"></i></span>
-                  <span class="btn-inner--text">Search</span>
-                </base-button>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-          </div>
-        </div>
-        -->
       </div>
     </div>
 
     <div class="w-100 border-bottom">
       <div class="container-fluid py-3">
-        <!--
-        <div class="row align-items-center mb-4">
-          <div class="col-auto py-1">
-            <base-button
-              icon
-              block
-              type="default"
-            >
-              <span class="btn-inner--icon"><i class="fas fa-barcode"></i></span>
-              <span class="btn-inner--text">Print Barcode</span>
-            </base-button>
-          </div>
-          <div class="col-auto py-1">
-            <base-button
-              icon
-              block
-              type="default"
-              @click="saveOrder"
-            >
-              <span class="btn-inner--icon"><i class="far fa-save"></i></span>
-              <span class="btn-inner--text">Save</span>
-            </base-button>
-          </div>
-          <div class="col-auto col-md text-right py-1">
-            <base-button
-              icon
-              outline
-              type="default"
-            >
-              <span class="btn-inner--icon"><i class="fas fa-printni fa-print"></i></span>
-            </base-button>
-            <base-button
-              icon
-              outline
-              type="default"
-              class="mx-4"
-            >
-              <span class="btn-inner--icon"><i class="fas fa-file-export"></i></span>
-              <span class="btn-inner--text">Export</span>
-            </base-button>
-          </div>
-        </div>
-        -->
         <div class="row align-items-center">
           <div class="col-12 col-lg-10 py-1">
             <div class="row align-items-end">
               <div class="col-4 col-md">
                 <base-input label="Date">
                   <flat-picker
-                    slot-scope="{ focus, blur }"
                     @on-open="focus"
                     @on-close="blur"
                     :config="flatPickerConfig"
                     class="form-control datepicker"
                     v-model="form.dateOrder"
-                  >
-                  </flat-picker>
+                  />
                 </base-input>
               </div>
               <div class="col-4 col-md">
@@ -153,8 +38,7 @@
                       :key="item.ID"
                       :label="item.NAME"
                       :value="item.ID"
-                    >
-                    </el-option>
+                    />
                   </el-select>
                 </base-input>
               </div>
@@ -170,8 +54,7 @@
                       :key="item.ID"
                       :label="item.NAME"
                       :value="item.ID"
-                    >
-                    </el-option>
+                    />
                   </el-select>
                 </base-input>
               </div>
@@ -187,8 +70,7 @@
                       :key="item.ID"
                       :label="item.NAME"
                       :value="item.ID"
-                    >
-                    </el-option>
+                    />
                   </el-select>
                 </base-input>
               </div>
@@ -204,8 +86,7 @@
                       :key="item.ID"
                       :label="item.NAME"
                       :value="item.ID"
-                    >
-                    </el-option>
+                    />
                   </el-select>
                 </base-input>
               </div>
@@ -250,11 +131,11 @@
           ref="singleTable"
           @selection-change="selectionChange"
         >
-          <el-table-column type="selection" align="left"> </el-table-column>
+          <el-table-column type="selection" align="left" />
 
-          <el-table-column label="No." prop="no" width="80"> </el-table-column>
-          <el-table-column label="Specimen" prop="specimen"> </el-table-column>
-          <el-table-column label="Test" prop="test"> </el-table-column>
+          <el-table-column label="No." prop="no" width="80" />
+          <el-table-column label="Specimen" prop="specimen" />
+          <el-table-column label="Test" prop="test" />
           <el-table-column label="HN" width="160">
             <template v-slot="{ row, $index }">
               <base-input
@@ -264,28 +145,9 @@
                 :inputClasses="{
                   'border-danger border': isError($index, 'hn'),
                 }"
-              >
-              </base-input>
+              />
             </template>
           </el-table-column>
-          <!--
-          <el-table-column
-            label="Edit HN"
-            width="130"
-          >
-            <template slot-scope="{ $index, row }">
-              <base-button
-                icon
-                type="primary"
-                :disabled="row.editHN"
-                @click="editHN(row , $index)"
-              >
-                <span class="btn-inner--icon"><i class="fas fa-search"></i></span>
-              </base-button>
-            </template>
-
-          </el-table-column>
-          -->
           <el-table-column label="First name" prop="firstname" width="160">
             <template v-slot="{ row, $index }">
               <base-input
@@ -295,8 +157,7 @@
                 :inputClasses="{
                   'border-danger border': isError($index, 'firstname'),
                 }"
-              >
-              </base-input>
+              />
             </template>
           </el-table-column>
           <el-table-column label="Last name" prop="lastname" width="160">
@@ -308,22 +169,9 @@
                 :inputClasses="{
                   'border-danger border': isError($index, 'lastname'),
                 }"
-              >
-              </base-input>
+              />
             </template>
           </el-table-column>
-          <!--
-          <el-table-column
-            label="Body site"
-            prop="bodySite"
-          >
-          </el-table-column>
-          <el-table-column
-            label="Location"
-            prop="location"
-          >
-          </el-table-column>
-          -->
           <el-table-column label="Client" prop="client" width="200">
             <template v-slot="{ row }">
               <base-input>
@@ -338,22 +186,19 @@
                     :key="item.id"
                     :label="item.business_name"
                     :value="item.id"
-                  >
-                  </el-option>
+                  />
                 </el-select>
               </base-input>
             </template>
           </el-table-column>
           <el-table-column label="Comment" prop="comment" width="200">
             <template v-slot="{ row }">
-              <base-input v-model="row.comment" type="text" placeholder="">
-              </base-input>
+              <base-input v-model="row.comment" type="text" placeholder="" />
             </template>
           </el-table-column>
           <el-table-column label="Lab Comment" prop="note" width="200">
             <template v-slot="{ row }">
-              <base-input v-model="row.note" type="text" placeholder="">
-              </base-input>
+              <base-input v-model="row.note" type="text" placeholder="" />
             </template>
           </el-table-column>
         </el-table>
@@ -368,106 +213,89 @@
           <span class="btn-inner--icon"><i class="far fa-save"></i></span>
           <span class="btn-inner--text">Save</span>
         </base-button>
-        <!--
-          <base-button icon outline type="default" @click="printLabel()">
-            <span class="btn-inner--icon"
-              ><i class="fas fa-printni fa-print"></i
-            ></span>
-            <span class="btn-inner--text">Label Sticker</span>
-          </base-button>
-          -->
       </div>
     </div>
   </div>
 </template>
+
 <script>
-import { Select, Option, Table, TableColumn } from "element-ui";
-import FavoriteButton from "./components/favorite-button.vue";
-import axios from "axios";
+import { ref, reactive, computed, onMounted } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { ofetch } from "ofetch";
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
-import swal from "sweetalert2";
 import { mappingApi } from "@/util/mappingApi";
-import { mapState } from "vuex";
+import FavoriteButton from "./components/favorite-button.vue";
+import { ElSelect, ElOption, ElTable, ElTableColumn } from "element-plus";
 
 export default {
-  middleware: "protected",
-  layout: "DashboardLayout",
   name: "batchOrder",
   components: {
     flatPicker,
-    [Select.name]: Select,
-    [Option.name]: Option,
-    [Table.name]: Table,
-    [TableColumn.name]: TableColumn,
+    ElSelect,
+    ElOption,
+    ElTable,
+    ElTableColumn,
     FavoriteButton,
   },
-  mounted() {
-    this.$store.commit("initializeStore");
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
-    if (this.$store.state.accessToken === null) {
-      this.$router.push("/login");
-    }
+    const select = reactive({
+      primaryTestData: [],
+      locationData: [],
+      bodySiteData: [],
+      specimenData: [],
+      clientList: [],
+    });
 
-    this.getLocation();
-    this.getBodySite();
-    this.getSpecimen();
-    this.getClients();
-    this.getTestPrimary();
-  },
-  data() {
-    return {
-      select: {
-        primaryTestData: [],
-        locationData: [],
-        bodySiteData: [],
-        specimenData: [],
-        clientList: [],
-      },
-      form: {
-        dateOrder:
-          new Date().getFullYear().toString() +
-          "-" +
-          (new Date().getMonth() + 1) +
-          "-" +
-          new Date().getDate().toString(),
-        primaryTest: "",
-        location: "",
-        bodySite: "",
-        specimen: "",
-        orderNumber: 1,
-      },
-      tableData: [],
-      errorData: [],
-      dateFrom:
+    const form = reactive({
+      dateOrder:
         new Date().getFullYear().toString() +
         "-" +
         (new Date().getMonth() + 1) +
         "-" +
         new Date().getDate().toString(),
-      searchRound: null,
-      flatPickerConfig: {
-        allowInput: true,
-        altInput: true,
-        altFormat: "d-m-Y",
-        dateFormat: "Y-m-d",
-      },
-      disabledSubmitButton: false,
-    };
-  },
-  methods: {
-    isError(index, field) {
-      return this.errorData.find((item) => {
+      primaryTest: "",
+      location: "",
+      bodySite: "",
+      specimen: "",
+      orderNumber: 1,
+    });
+
+    const tableData = ref([]);
+    const errorData = ref([]);
+    const dateFrom = ref(
+      new Date().getFullYear().toString() +
+        "-" +
+        (new Date().getMonth() + 1) +
+        "-" +
+        new Date().getDate().toString()
+    );
+    const searchRound = ref(null);
+    const flatPickerConfig = reactive({
+      allowInput: true,
+      altInput: true,
+      altFormat: "d-m-Y",
+      dateFormat: "Y-m-d",
+    });
+    const disabledSubmitButton = ref(false);
+
+    const isError = (index, field) => {
+      return errorData.value.find((item) => {
         return item.index === index && item[field];
       });
-    },
-    saveOrder() {
+    };
+
+    const saveOrder = () => {
       let isEmpty = false;
 
-      this.tableData.forEach((item, idx) => {
+      tableData.value.forEach((item, idx) => {
         if (item.hn === "" || item.firstname === "" || item.lastname === "") {
           isEmpty = true;
-          this.errorData.push({
+          errorData.value.push({
             index: idx,
             hn: item.hn === "",
             firstname: item.firstname === "",
@@ -489,7 +317,7 @@ export default {
         });
         return;
       } else {
-        this.errorData = [];
+        errorData.value = [];
         swal
           .fire({
             icon: "question",
@@ -506,18 +334,18 @@ export default {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              this.disabledSubmitButton = true;
+              disabledSubmitButton.value = true;
 
               const url =
-                this.$store.state.urlBase + "/api/order/batch_order_multiple";
+                store.state.urlBase + "/api/order/batch_order_multiple";
               const FormData = require("form-data");
-              if (this.tableData !== null && this.tableData.length > 0) {
+              if (tableData.value !== null && tableData.value.length > 0) {
                 let formData = null;
                 let chkSuccess = true;
                 formData = new FormData();
 
-                this.tableData.forEach((element, index) => {
-                  formData.append(`ORDER_TIME[${index}]`, this.form.dateOrder);
+                tableData.value.forEach((element, index) => {
+                  formData.append(`ORDER_TIME[${index}]`, form.dateOrder);
                   formData.append(`SPECIMEN_ID[${index}]`, element.specimen);
                   formData.append(`TEST_PRIMARY_ID[${index}]`, element.test);
                   formData.append(`BODY_SITE_ID[${index}]`, element.bodySite);
@@ -530,15 +358,14 @@ export default {
                   formData.append(`CUSTOMER_ID[${index}]`, element.client);
                 });
 
-                axios({
+                ofetch(url, {
                   method: "post",
-                  url: url,
-                  data: formData,
+                  body: formData,
                   headers: { "Content-Type": "multipart/form-data" },
                 })
                   .then((response) => {
                     const result = response;
-                    if (result["status"] !== "success") this.chkSuccess = false;
+                    if (result["status"] !== "success") chkSuccess = false;
 
                     if (chkSuccess) {
                       swal.fire({
@@ -554,7 +381,7 @@ export default {
                           cancelButton: "btn btn-light",
                         },
                       });
-                      this.tableData = [];
+                      tableData.value = [];
                     } else {
                       swal.fire({
                         icon: "error",
@@ -572,7 +399,7 @@ export default {
                       });
                     }
 
-                    this.disabledSubmitButton = false;
+                    disabledSubmitButton.value = false;
                   })
                   .catch((err) => {
                     swal.fire({
@@ -594,12 +421,14 @@ export default {
             }
           });
       }
-    },
-    editHN(row, index) {
+    };
+
+    const editHN = (row, index) => {
       console.log(row);
-    },
-    createBatchOrder() {
-      if (this.form.dateOrder === "" || this.form.primaryTest === "") {
+    };
+
+    const createBatchOrder = () => {
+      if (form.dateOrder === "" || form.primaryTest === "") {
         swal.fire({
           title: "Please select date, test, specimen and location",
           icon: "error",
@@ -610,7 +439,7 @@ export default {
           },
         });
       } else {
-        const numberOrder = this.form.orderNumber;
+        const numberOrder = form.orderNumber;
         for (let i = 0; i < numberOrder; i++) {
           const dateRow = {
             no: i + 1,
@@ -619,141 +448,168 @@ export default {
             editHN: false,
             firstname: "",
             lastname: "",
-            specimen: this.form.specimen,
-            bodySite: this.form.bodySite,
-            test: this.form.primaryTest,
-            location: this.form.location,
+            specimen: form.specimen,
+            bodySite: form.bodySite,
+            test: form.primaryTest,
+            location: form.location,
             client: "",
             comment: "",
             note: "",
           };
-          this.tableData.push(dateRow);
+          tableData.value.push(dateRow);
         }
       }
-    },
-    getLocation() {
+    };
+
+    const getLocation = () => {
       const url =
-        this.$store.state.urlBase + "/api/" + mappingApi("data_location.php");
+        store.state.urlBase + "/api/" + mappingApi("data_location.php");
       const params = {
         data: "list",
       };
-      axios
-        .get(url, {
-          params,
-        })
+      ofetch(url, {
+        params,
+      })
         .then((response) => {
-          this.select.locationData = response;
+          select.locationData = response;
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
-        .then(function () {
-          // always executed
         });
-    },
-    getBodySite() {
+    };
+
+    const getBodySite = () => {
       const url =
-        this.$store.state.urlBase + "/api/" + mappingApi("data_body_site.php");
+        store.state.urlBase + "/api/" + mappingApi("data_body_site.php");
       const params = {
         data: "list",
       };
-      axios
-        .get(url, {
-          params,
-        })
+      ofetch(url, {
+        params,
+      })
         .then((response) => {
-          this.select.bodySiteData = response;
+          select.bodySiteData = response;
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
-        .then(function () {
-          // always executed
         });
-    },
-    getSpecimen() {
+    };
+
+    const getSpecimen = () => {
       const api = mappingApi("data_specimen.php");
       const queryParam = "data=list";
-      const url = `${this.$store.state.urlBase}/api/${api}?${queryParam}`;
-      axios
-        .get(url)
+      const url = `${store.state.urlBase}/api/${api}?${queryParam}`;
+      ofetch(url)
         .then((response) => {
-          this.select.specimenData = response;
+          select.specimenData = response;
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
-        .then(function () {
-          // always executed
         });
-    },
-    getClients() {
-      const url = `${this.$store.state.urlBase}/api/customers`;
+    };
 
-      axios({
+    const getClients = () => {
+      const url = `${store.state.urlBase}/api/customers`;
+
+      ofetch(url, {
         method: "get",
-        url: url,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
         const result = response;
         if (result !== null) {
           let tmpTableData = result;
-          this.select.clientList = tmpTableData;
+          select.clientList = tmpTableData;
         }
       });
-    },
-    getTestPrimary() {
+    };
+
+    const getTestPrimary = () => {
       const api = mappingApi("data_test_primary.php");
       const queryParam = "data=list";
-      const url = `${this.$store.state.urlBase}/api/${api}?${queryParam}`;
-      axios
-        .get(url)
+      const url = `${store.state.urlBase}/api/${api}?${queryParam}`;
+      ofetch(url)
         .then((response) => {
-          this.select.primaryTestData = response;
+          select.primaryTestData = response;
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
-        .then(function () {
-          // always executed
         });
-    },
-    selectionChange(selectedRows) {
+    };
+
+    const selectionChange = (selectedRows) => {
       console.log(selectedRows);
-      this.selectedRows = selectedRows;
-    },
-  },
-  computed: {
-    ...mapState(["permissions"]),
-    canCreateTestPermision() {
-      return this.permissions.some(
+      selectedRows.value = selectedRows;
+    };
+
+    onMounted(() => {
+      store.commit("initializeStore");
+
+      if (store.state.accessToken === null) {
+        router.push("/login");
+      }
+
+      getLocation();
+      getBodySite();
+      getSpecimen();
+      getClients();
+      getTestPrimary();
+    });
+
+    const permissions = computed(() => store.state.permissions);
+
+    const canCreateTestPermision = computed(() => {
+      return permissions.value.some(
         (permission) => permission.permission_id === 2
       );
-    },
-  },
-  watch: {
-    canCreateTestPermision: {
-      handler: function (val) {
-        if (!val && this.permissions.length !== 0) {
-          this.$router.push("/dashboard");
+    });
+
+    watch(
+      () => canCreateTestPermision.value,
+      (val) => {
+        if (!val && permissions.value.length !== 0) {
+          router.push("/dashboard");
         }
-      },
-    },
-    permissions: {
-      handler: function (val) {
-        if (!this.canCreateTestPermision && val.length !== 0) {
-          this.$router.push("/dashboard");
+      }
+    );
+
+    watch(
+      () => permissions.value,
+      (val) => {
+        if (!canCreateTestPermision.value && val.length !== 0) {
+          router.push("/dashboard");
         }
-      },
-    },
+      }
+    );
+
+    return {
+      select,
+      form,
+      tableData,
+      errorData,
+      dateFrom,
+      searchRound,
+      flatPickerConfig,
+      disabledSubmitButton,
+      isError,
+      saveOrder,
+      editHN,
+      createBatchOrder,
+      getLocation,
+      getBodySite,
+      getSpecimen,
+      getClients,
+      getTestPrimary,
+      selectionChange,
+      permissions,
+      canCreateTestPermision,
+    };
   },
 };
 </script>
-<style></style>
 
 <style scoped>
 small {
